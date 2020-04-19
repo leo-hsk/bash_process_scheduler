@@ -1,11 +1,29 @@
 #! /bin/bash
 
 # Create some samples here that will later be replaced by the real output from the Algorithms
+process_names=(A B C D E F G)
 
-process_names=(0 1 2 3 4 5 6)
 process_flow=( 0 0 0 0 0 0 0 0 0 0 0 0 0 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 5 5 5 5 5 5 5 3 3 3 3 3 3 3 3 3 3 3 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 6 6 6 6 6 6 6 6)
 
-output_data=( 'A    ' 'B     ' 'C     ' 'D     ' 'E     ' 'F     ' 'G     ' )
+
+declare -a process_nums
+declare -a output_data
+
+len_names=${#process_names[@]}
+
+# For every name in the process names we want a number in process nums, satrting with 1:
+let x=$len_names-1
+echo $x
+for i in $(seq 0 $x)
+do 
+    process_nums[$i]=$i
+    output_data[$i]=${process_names[$i]}'    '
+done
+
+#echo ${process_nums[*]}
+echo ${output_data[*]}
+
+
 
 
 
@@ -13,7 +31,7 @@ output_data=( 'A    ' 'B     ' 'C     ' 'D     ' 'E     ' 'F     ' 'G     ' )
 for p in "${process_flow[@]}"
 do
     output_data[$p]=${output_data[$p]}'█'
-    for p2 in "${process_names[@]}"
+    for p2 in "${process_nums[@]}"
     do
         if [ $p2 != $p ]
         then
