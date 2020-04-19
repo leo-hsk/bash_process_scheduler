@@ -1,0 +1,16 @@
+Some symbols that might be useful: 
+
+
+light  ░ ░░
+
+medium ▒ ▒▒
+
+dark   ▓ ▓▓
+
+╳
+
+
+7/8  ▉▉▉
+full ███
+
+○ ◔ ◑ ◕ ●
