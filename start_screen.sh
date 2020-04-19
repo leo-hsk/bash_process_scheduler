@@ -44,6 +44,13 @@ then
 	## Choose no. of processes
 	printf "\nEnter the number of processes you want to create: "
 	read n
+	# Check if input is integer and NOT zero
+	while ! [[ "$n" =~ ^[1-9]+$ ]]
+	do
+       	printf "${red}Sorry integers > 0 only${end}\n"
+       	printf "\nEnter the number of processes you want to create: "
+       	read n
+	done
 
 	## changing the no. of elements in each array to the choosen number n
 	declare -a process_names=( $(for i in $(seq 1 $n); do echo 0; done) )
