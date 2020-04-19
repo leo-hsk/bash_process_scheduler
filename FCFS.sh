@@ -21,7 +21,7 @@ declare -a at=( 0 1 2 3 )
 #
 #############
 
-# Declaring arrays for storing the waiting time and the turnaround time
+# Declaring arrays for storing the waiting time and the turn around time
 declare -a wt=( $(for i in $(seq 1 $n); do echo 0; done) )
 declare -a tat=( $(for i in $(seq 1 $n); do echo 0; done) )
 
