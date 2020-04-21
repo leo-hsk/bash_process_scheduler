@@ -1,11 +1,12 @@
 Some symbols that might be useful: 
 
-
 light  ░ ░░
 
 medium ▒ ▒▒
 
 dark   ▓ ▓▓
+
+full   █ ██
 
 ╳
 
