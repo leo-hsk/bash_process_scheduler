@@ -19,9 +19,9 @@ declare -a bt=( 5 3 8 6 7 )
 # Arrival Time
 declare -a at=( 0 1 2 3 5 )
 
-# Initialize output with -1 values
 
-declare -a output=( $(for i in $(seq 1 $max_no); do echo -1; done) )
+
+declare -a process_flow=()
 
 
 
@@ -38,19 +38,26 @@ do
 	# Length of the burst time of the process
 	burst_length=$((bt[$id])) 
 
+
 	## Iterate through the burst time and set an element of the output to the process ID
 	for i in $(seq 0 $burst_length)
 	do
 		# Controlling
 		#echo $id
 
-		output[$(($i+$timestamp))]=$id
+		process_flow[$(($i+$timestamp))]=$id
+
+		# Check if the output arrays elements are max_no, if yes, leave all loops. max_no is the max allowed number of characters
+		if [ $(($i+$timestamp)) -ge $max_no ]
+		then
+			break 2 # break 2 loops
+		fi
+
 
 	done
 
 	# Adding the process ID (no. of process) to the timestamp
 	timestamp=$(($timestamp+$i))
-
 
 	# Controlling
 	#echo "-----------"
@@ -59,11 +66,8 @@ do
 	
 done
 
-## Shorten the output by deleting the -1 values if there are any left.
 
-
-
-
-echo ${output[@]}
+# Controlling
+echo ${process_flow[@]}
 
 

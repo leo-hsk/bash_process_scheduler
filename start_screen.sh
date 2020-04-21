@@ -8,6 +8,9 @@ version="0.001 alpha"
 # No. of (sample) processes
 n=5
 
+# Max no. of gantt chart characters
+max_no=75
+
 # List of process names
 declare -a process_names=( 1 2 3 4 5 )
 
