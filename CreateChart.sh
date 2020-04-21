@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Create some samples here that will later be replaced by the real output from the Algorithms
-process_names=(ResA Vid2 x01 p5)
+process_names=(ResssA Vid2 x01 p5)
 
 # Wichtig: Ich gehe hier davon aus das jedem Prozess der Reihenfolge nach eine nummer gegeben wird.
 # Also A -> 0, B -> 1, C -> 2 ... 
@@ -21,11 +21,10 @@ spaces="     "
 let x=$len_names-1
 for i in $(seq 0 $x)  # Loop trough range 0 to length of namesList.
 do 
-    process_nums[$i]=$i  # Every Process names gets a corresponding number in the numbersList.
-    if [ ${#process_names[$i]} > 5 ]  # Long names will be shortend.
-        then
-            process_names[$i]=${process_names[$i]::5}  # If a Process name is longer than 5 chars it gets shortend here.
-    fi
+    process_nums[$i]=$i  # Every Process names gets a corresponding number (its own index i all the arrays) in the numbersList.
+
+    process_names[$i]=${process_names[$i]::5}  # If a Process name is longer than five chars it gets shortend to five.
+    
 
     let l=5-${#process_names[$i]}  
     s=${spaces::$l}  # If name is less than 5 chars -> fill rest with spaces.
