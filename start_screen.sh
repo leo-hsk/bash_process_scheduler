@@ -11,6 +11,9 @@ n=5
 # List of process names
 declare -a process_names=( 1 2 3 4 5 )
 
+# List of process IDs
+declare -a process_IDs=( 0 1 2 3 4 5 )
+
 # List of burst time
 declare -a bt=( 5 3 8 6 7 )
 
@@ -54,6 +57,7 @@ then
 
 	## changing the no. of elements in each array to the choosen number n
 	declare -a process_names=( $(for i in $(seq 1 $n); do echo 0; done) )
+	declare -a process_IDs=( $(for i in $(seq 1 $n); do echo $(($i-1)); done) )
 	declare -a bt=( $(for i in $(seq 1 $n); do echo 0; done) )
 	declare -a at=( $(for i in $(seq 1 $n); do echo 0; done) )
 
