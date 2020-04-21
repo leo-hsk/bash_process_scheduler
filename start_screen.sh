@@ -11,8 +11,8 @@ n=5
 # List of process names
 declare -a process_names=( 1 2 3 4 5 )
 
-# List of process IDs
-declare -a process_IDs=( 0 1 2 3 4 5 )
+# List of process IDs. The IDs represent the index of the process.
+declare -a process_IDs=( 0 1 2 3 4 )
 
 # List of burst time
 declare -a bt=( 5 3 8 6 7 )
