@@ -1,13 +1,13 @@
 #! /bin/bash
 
 # Create some samples here that will later be replaced by the real output from the Algorithms
-process_names=(ResssA Vid2 x01 p5)
+process_names=( A B C D)
 
 # Wichtig: Ich gehe hier davon aus das jedem Prozess der Reihenfolge nach eine nummer gegeben wird.
 # Also A -> 0, B -> 1, C -> 2 ... 
 # Und das in der Simulation nicht die namen in die Output Liste geschreiben werden, sondern eben die Nummer:
 # Die Output Liste sollte dann so aussehen:
-process_flow=( 0 0 0 0 1 1 0 0 2 2 2 3 3 3 2 2 0 0 0 0 0 0 0)
+process_flow=(-1 1 1 1 2 2 2 3 3 3 1 2 2 2 3 3 3 2 2 3 -1 -1 0 0 0 0 0)
 
 algorithm="Shortest Remaining Time First"
 
@@ -40,14 +40,23 @@ done
 # Create the actual chart:
 for p in "${process_flow[@]}"
 do
-    output_data[$p]=${output_data[$p]}'█' # In the line of the process that gets processed in this time unit a █ gets added.
-    for p2 in "${process_nums[@]}"
-    do
-        if [ $p2 != $p ]
-        then
+    if [ $p == -1 ]
+    then 
+        for p2 in "${process_nums[@]}"
+        do
             output_data[$p2]=${output_data[$p2]}'░' # On every other processe's line a ░ gets added.
-        fi
-    done
+        done
+    else
+
+        output_data[$p]=${output_data[$p]}'█' # In the line of the process that gets processed in this time unit a █ gets added.
+        for p2 in "${process_nums[@]}"
+        do
+            if [ $p2 != $p ]
+            then
+                output_data[$p2]=${output_data[$p2]}'░' # On every other processe's line a ░ gets added.
+            fi
+        done
+    fi
 done
 
 

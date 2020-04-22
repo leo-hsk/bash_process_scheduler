@@ -8,16 +8,16 @@ max_no=75
 # No. of (sample) processes
 n=5
 
-declare -a process_names=( 1 2 3 4 5 )
+declare -a process_names=( A B C D E )
 
 # List of process IDs
 declare -a process_IDs=( 0 1 2 3 4 )
 
 # List of burst time
-declare -a bt=( 5 3 8 6 7 )
+declare -a bt=( 1 1 1 1 )
 
 # Arrival Time
-declare -a at=( 0 1 2 3 5 )
+declare -a at=( 5 5 2 0 9 )
 
 
 #output of the "function"
