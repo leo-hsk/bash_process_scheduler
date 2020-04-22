@@ -1,13 +1,13 @@
 #! /bin/bash
 
 # Create some samples here that will later be replaced by the real output from the Algorithms
-process_names=(ResssA Vid2 x01 p5)
+process_names=( A B C D)
 
 # Wichtig: Ich gehe hier davon aus das jedem Prozess der Reihenfolge nach eine nummer gegeben wird.
 # Also A -> 0, B -> 1, C -> 2 ... 
 # Und das in der Simulation nicht die namen in die Output Liste geschreiben werden, sondern eben die Nummer:
 # Die Output Liste sollte dann so aussehen:
-process_flow=( 1 1 1 -1 -1 -1 0 0 2 0 -1 -1 3 3)
+process_flow=(-1 1 1 1 2 2 2 3 3 3 1 2 2 2 3 3 3 2 2 3 -1 -1 0 0 0 0 0)
 
 algorithm="Shortest Remaining Time First"
 
