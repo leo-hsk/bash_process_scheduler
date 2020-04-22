@@ -20,7 +20,7 @@ declare -a bt=( 5 3 8 6 7 )
 declare -a at=( 0 1 2 3 5 )
 
 
-
+#output of the "function"
 declare -a process_flow=()
 
 
@@ -34,12 +34,12 @@ timestamp=0
 ## Iterate through each process ID (increasing number from 0 to n)
 for id in ${process_IDs[@]}
 do
-	
+		
 	# Length of the burst time of the process
 	burst_length=$((bt[$id])) 
 
 
-	## Iterate through the burst time and set an element of the output to the process ID
+	## Iterate through the burst time and add the process ID to the process_flow array
 	for i in $(seq 0 $burst_length)
 	do
 		# Controlling
