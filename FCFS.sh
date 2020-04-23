@@ -55,36 +55,36 @@ echo $smallest
 
 
 # Track the no. of iterations
-clock=0
+	clock=0
 
-# Loop until the sum of the burst time array is zero
-while [ $(IFS=+; echo "$((${bt[*]}))") -gt 0 ]
-do
-	# Find index of the smallest arrival time
-	id=$(findSmallest)
-	let tmp=${at[$id]}-$clock
+	# Loop until the sum of the burst time array is zero
+	while [ $(IFS=+; echo "$((${bt[*]}))") -gt 0 ]
+	do
+		# Find index of the smallest arrival time
+		id=$(findSmallest)
+		let tmp=${at[$id]}-$clock
 
-	if [[ $tmp -le 0 ]]
-	then
-		service_units=${bt[$id]}
+		if [[ $tmp -le 0 ]]
+		then
+			service_units=${bt[$id]}
 
-		# Iterate through service_units ( Number of bursts)
-		for burst in $(seq 1 $service_units)
-		do
-			# Add the id of the process to the process_flow array
-			process_flow+=$id" "
-		done
+			# Iterate through service_units ( Number of bursts)
+			for burst in $(seq 1 $service_units)
+			do
+				# Add the id of the process to the process_flow array
+				process_flow[$(($clock+$burst))]=$id
+			done
 
-		# Add the number of service units to the clock
-		clock=$(($clock+$service_units))
-		bt[$id]=0
-		at[$id]=$(($max_no+1)) # IMPORTANT To Do: the algorithm is only working if the arrival time is set to high number.
+			# Add the number of service units to the clock
+			clock=$(($clock+$service_units))
+			bt[$id]=0
+			at[$id]=$(($max_no+1)) # IMPORTANT To Do: the algorithm is only working if the arrival time is set to high number.
 
-	else
-		# If there is no process ready to process, add -1 to the process flow array
-		process_flow+=-1" "
-		clock=$(($clock+1))
-	fi
-done
+		else
+			# If there is no process ready to process, add -1 to the process flow array
+			process_flow[$(($clock+1))]=-1
+			clock=$(($clock+1))
+		fi
+	done
 
-echo ${process_flow[@]}
+	echo ${process_flow[@]}

@@ -40,7 +40,7 @@ done
 # Create the actual chart:
 for p in "${process_flow[@]}"
 do
-    if [ $p == -1 ]
+    if [[ $p == -1 ]]
     then 
         for p2 in "${process_nums[@]}"
         do
@@ -51,7 +51,7 @@ do
         output_data[$p]=${output_data[$p]}'█' # In the line of the process that gets processed in this time unit a █ gets added.
         for p2 in "${process_nums[@]}"
         do
-            if [ $p2 != $p ]
+            if [[ $p2 != $p ]]
             then
                 output_data[$p2]=${output_data[$p2]}'░' # On every other processe's line a ░ gets added.
             fi
