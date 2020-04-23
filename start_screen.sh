@@ -59,6 +59,7 @@ then
 	done
 
 	## changing the no. of elements in each array to the choosen number n
+	#### TO DO: We do not need to declare each element, change it to e.g. bt=( )
 	declare -a process_names=( $(for i in $(seq 1 $n); do echo 0; done) )
 	declare -a process_IDs=( $(for i in $(seq 1 $n); do echo $(($i-1)); done) )
 	declare -a bt=( $(for i in $(seq 1 $n); do echo 0; done) )
