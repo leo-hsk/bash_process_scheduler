@@ -1,5 +1,5 @@
 # !/bin/bash
-
+# returns the index of the smallest value in an array
 
 at=( 7 7 6 1 9 )
 
