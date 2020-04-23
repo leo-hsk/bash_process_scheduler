@@ -14,10 +14,10 @@ declare -a process_names=( A B C D E )
 declare -a process_IDs=( 0 1 2 3 4 )
 
 # List of burst time
-declare -a bt=( 1 1 1 1 )
+declare -a bt=( 3 1 1 4 4 )
 
 # Arrival Time
-declare -a at=( 5 5 2 0 9 )
+declare -a at=( 5 6 2 0 9 )
 
 
 #output of the "function"
@@ -69,5 +69,7 @@ done
 
 # Controlling
 echo ${process_flow[@]}
+
+
 
 
