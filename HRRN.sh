@@ -32,10 +32,24 @@ declare -a process_flow=()
 
 
 
+
+function calcResponseRatio() {
+	# Reset the isWaiting array to all zeros
+
+	for p in ${process_IDs[@]}
+	do
+		########## TO DO: Calculate response ratio fo each process
+		responseR[$p]=$((wt[$p]))
+		########## FEHLER!!!
+	done
+}
+
+
+
 # Return idex of the smallest value in the arrival array
 function findHighestResponseRatio(){
 
-	calcRepsonseRatio
+	calcResponseRatio
 
 	# Start with index 0
 	highest=0
@@ -44,7 +58,7 @@ function findHighestResponseRatio(){
 	for i in ${process_IDs[@]}
 	do
 		# If the element is -1, increase it by one
-		if [[ $((responseR[$i])) -eq -1 ]]
+		if [[ $((at[$i])) -eq -1 ]]
 		then
 			highest=$(($highest+1))
 		else
@@ -80,18 +94,6 @@ function getAllWaitingJobs() {
 	# echo "Finished" ${isWaiting[@]}
 
 }
-
-
-function calcRepsonseRatio() {
-	# Reset the isWaiting array to all zeros
-
-	for p in ${process_IDs[@]}
-	do
-		# Calculate response ratio fo each process
-		responseR[$p]=$((($((wt[$p]))/$((bt[$p])))+1))
-	done
-}
-
 
 
 # Track the no. of iterations
