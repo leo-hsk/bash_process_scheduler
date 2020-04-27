@@ -23,6 +23,9 @@ declare -a wt=( $(for i in $(seq 1 $n); do echo 0; done) )
 # One if process is waiting and zero if not
 isWaiting=( $(for i in $(seq 1 $n); do echo 0; done) )
 
+# Response Ratio
+responseR=( $(for i in $(seq 1 $n); do echo 0; done) )
+
 
 #output of the "function"
 declare -a process_flow=()
@@ -30,38 +33,38 @@ declare -a process_flow=()
 
 
 # Return idex of the smallest value in the arrival array
-function findSmallest(){
+function findHighestResponseRatio(){
+
+	calcRepsonseRatio
+
 	# Start with index 0
-	smallest=0
+	highest=0
 
-	# Get length -1 of the arrival time array
-	let len=${#at[*]}-1
-
-	# Iterate through each arrival time element
-	for i in $(seq 0 $len)
+	# Iterate through each responseRatio element
+	for i in ${process_IDs[@]}
 	do
-		# If the element is -1, ignore it
-		if [[ $((at[$i])) -eq -1 ]]
+		# If the element is -1, increase it by one
+		if [[ $((responseR[$i])) -eq -1 ]]
 		then
-			continue
+			highest=$(($highest+1))
 		else
-			# Check if the value of the arrival time element is less then the smallest (first) at this time
-    		if [[ $((at[$i])) -lt $((at[$smallest])) ]]
+			# Check if the value of the response ratio element is more than the highest (first) at this time
+    		if [[ $((responseR[$i])) -gt $((responseR[$highest])) ]]
      		then
-     			# If yes, set the current index of the arrival time element to the smallest value
-        		smallest=$i
+     			# If yes, set the current index of the response ratio element to the highest value
+        		highest=$i
      		fi
      	fi
 done
-# Return index of the smallest value
-echo $smallest
+# Return index of the highest value
+echo $highest
 
 }
 
 function getAllWaitingJobs() {
 
 	# Reset the isWaiting array to all zeros
-	for i in $(seq 0 $((${#isWaiting[@]}-1)))
+	for i in ${process_IDs[@]}
 	do
 		isWaiting[$i]=0
 	done
@@ -79,6 +82,17 @@ function getAllWaitingJobs() {
 }
 
 
+function calcRepsonseRatio() {
+	# Reset the isWaiting array to all zeros
+
+	for p in ${process_IDs[@]}
+	do
+		# Calculate response ratio fo each process
+		responseR[$p]=$((($((wt[$p]))/$((bt[$p])))+1))
+	done
+}
+
+
 
 # Track the no. of iterations
 	clock=0
@@ -87,7 +101,7 @@ function getAllWaitingJobs() {
 	while [ $(IFS=+; echo "$((${bt[*]}))") -gt 0 ]
 	do
 		# Find index of the smallest arrival time
-		id=$(findSmallest)
+		id=$(findHighestResponseRatio)
 		let tmp=${at[$id]}-$clock
 
 		if [[ $tmp -le 0 ]]
