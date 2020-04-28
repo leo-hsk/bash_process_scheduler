@@ -109,7 +109,6 @@ function getAllWaitingJobs() {
 		# Find index of the smallest arrival time
 		calcResponseRatio
 		id=$(findHighestResponseRatio)
-		echo ${responseR[@]}
 		let tmp=${at[$id]}-$clock
 		if [[ $tmp -le 0 ]]
 		then
@@ -147,7 +146,6 @@ function getAllWaitingJobs() {
 			# If there is no process ready to process, add -1 to the process flow array
 			process_flow[$(($clock))]=-1
 			clock=$(($clock+1))
-			echo clock1
 
 		fi
 	done
