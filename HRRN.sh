@@ -1,3 +1,4 @@
+#! /bin/bash
 ############ input
 
 # Max no. of gantt chart characters
@@ -45,24 +46,8 @@ function calcResponseRatio() {
 	done
 }
 
-
-function calcResponseRatio() {
-	# Reset the isWaiting array to all zeros
-
-	for p in ${process_IDs[@]}
-	do
-		########## TO DO: Calculate response ratio fo each process
-		responseR[$p]=$((wt[$p]))
-		########## FEHLER!!!
-	done
-}
-
-
-
 # Return idex of the smallest value in the arrival array
 function findHighestResponseRatio(){
-
-	calcResponseRatio
 	# Start with index 0
 
 	highest=0
@@ -71,8 +56,6 @@ function findHighestResponseRatio(){
 	for i in ${process_IDs[@]}
 	do
 		if [[ ${at[$i]} -le $clock ]]
-		# If the element is -1, increase it by one
-		if [[ $((at[$i])) -eq -1 ]]
 		then
 		# If the element is -1, increase it by one
 			if [[ $((at[$i])) -eq -1 ]]
@@ -112,6 +95,10 @@ function getAllWaitingJobs() {
 	# echo "Finished" ${isWaiting[@]}
 
 }
+
+
+
+
 
 # Track the no. of iterations
 	clock=0
@@ -166,3 +153,4 @@ function getAllWaitingJobs() {
 	done
 
 	echo ${process_flow[@]}
+	
