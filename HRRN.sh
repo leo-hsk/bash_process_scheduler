@@ -30,31 +30,45 @@ responseR=( $(for i in $(seq 1 $n); do echo 0; done) )
 #output of the "function"
 declare -a process_flow=()
 
-
+function calcResponseRatio() {
+	# Reset the isWaiting array to all zeros
+	for p in ${process_IDs[@]}
+	do
+		# Calculate response ratio fo each process * 1000
+		if [[ ${bt[$p]} -eq 0 ]]
+		then
+			responseR[$p]=0
+		else
+			rratio=$(bc <<< "scale=0;(${wt[$p]}+${bt[$p]})*1000/${bt[$p]}")
+			responseR[$p]=$rratio
+		fi
+	done
+}
 
 # Return idex of the smallest value in the arrival array
 function findHighestResponseRatio(){
-
-	calcRepsonseRatio
-
 	# Start with index 0
+
 	highest=0
 
 	# Iterate through each responseRatio element
 	for i in ${process_IDs[@]}
 	do
-		# If the element is -1, increase it by one
-		if [[ $((responseR[$i])) -eq -1 ]]
+		if [[ ${at[$i]} -le $clock ]]
 		then
-			highest=$(($highest+1))
-		else
-			# Check if the value of the response ratio element is more than the highest (first) at this time
-    		if [[ $((responseR[$i])) -gt $((responseR[$highest])) ]]
-     		then
-     			# If yes, set the current index of the response ratio element to the highest value
-        		highest=$i
-     		fi
-     	fi
+		# If the element is -1, increase it by one
+			if [[ $((at[$i])) -eq -1 ]]
+			then
+				highest=$(($highest+1))
+			else
+				# Check if the value of the response ratio element is more than the highest (first) at this time
+	    		if [[ $((responseR[$i])) -ge $((responseR[$highest])) ]]
+	     		then
+	     			# If yes, set the current index of the response ratio element to the highest value
+	        		highest=$i
+	     		fi
+	     	fi
+	     fi
 done
 # Return index of the highest value
 echo $highest
@@ -82,15 +96,6 @@ function getAllWaitingJobs() {
 }
 
 
-function calcRepsonseRatio() {
-	# Reset the isWaiting array to all zeros
-
-	for p in ${process_IDs[@]}
-	do
-		# Calculate response ratio fo each process
-		responseR[$p]=$((($((wt[$p]))/$((bt[$p])))+1))
-	done
-}
 
 
 
@@ -101,9 +106,10 @@ function calcRepsonseRatio() {
 	while [ $(IFS=+; echo "$((${bt[*]}))") -gt 0 ]
 	do
 		# Find index of the smallest arrival time
+		calcResponseRatio
 		id=$(findHighestResponseRatio)
+		echo ${responseR[@]}
 		let tmp=${at[$id]}-$clock
-
 		if [[ $tmp -le 0 ]]
 		then
 			service_units=${bt[$id]}
@@ -140,6 +146,7 @@ function calcRepsonseRatio() {
 			# If there is no process ready to process, add -1 to the process flow array
 			process_flow[$(($clock))]=-1
 			clock=$(($clock+1))
+			echo clock1
 
 		fi
 	done
