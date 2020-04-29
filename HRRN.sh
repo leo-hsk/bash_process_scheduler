@@ -16,10 +16,14 @@ declare -a process_IDs=( 0 1 2 3 4 )
 declare -a bt=( 3 5 1 3 6)
 
 # Arrival Time
-declare -a at=( 3 5 7 2 6 )
+declare -a at=( 3 5 7 2 6 ) # Copy (mutable)
+declare -a arrival_time=( 3 5 7 2 6 ) # Original (immutable)
 
 # Waiting Time
 declare -a wt=( $(for i in $(seq 1 $n); do echo 0; done) )
+
+# Turnaround Time
+declare -a tat=( $(for i in $(seq 1 $n); do echo 0; done) )
 
 # One if process is waiting and zero if not
 isWaiting=( $(for i in $(seq 1 $n); do echo 0; done) )
@@ -142,6 +146,9 @@ function getAllWaitingJobs() {
 			bt[$id]=0
 			at[$id]=$(($max_no+1)) # IMPORTANT To Do: the algorithm is only working if the arrival time is set to high number.
 
+			# Calculate the turnaround time using the immutable arrival time array.
+			tat[$id]=$(($clock-${arrival_time[$id]}))
+
 		else
 			# If there is no process ready to process, add -1 to the process flow array
 			process_flow[$(($clock))]=-1
@@ -151,4 +158,5 @@ function getAllWaitingJobs() {
 	done
 
 	echo ${process_flow[@]}
+	echo tat ${tat[@]}
 	

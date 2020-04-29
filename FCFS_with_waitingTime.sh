@@ -15,8 +15,8 @@ declare -a process_IDs=( 0 1 2 3 4 )
 declare -a bt=( 3 5 1 3 6)
 
 # Arrival Time
-declare -a at=( 3 5 7 2 6 )
-declare -a arrival_time=( 3 5 7 2 6 )
+declare -a at=( 3 5 7 2 6 ) # Copy (mutable)
+declare -a arrival_time=( 3 5 7 2 6 ) # Original (immutable)
 
 # Waiting Time
 declare -a wt=( $(for i in $(seq 1 $n); do echo 0; done) )
