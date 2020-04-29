@@ -7,17 +7,17 @@ max_no=75
 # No. of (sample) processes
 n=5
 
-declare -a process_names=( A B C D E )
+declare -a process_names=( A B C )
 
 # List of process IDs
-declare -a process_IDs=( 0 1 2 3 4 )
+declare -a process_IDs=( 0 1 2 )
 
 # List of burst time
-declare -a bt=( 3 5 1 3 6)
+declare -a bt=( 3 1 2 )
 
 # Arrival Time
-declare -a at=( 3 5 7 2 6 ) # Copy (mutable)
-declare -a arrival_time=( 3 5 7 2 6 ) # Original (immutable)
+declare -a at=( 1 5 0 ) # Copy (mutable)
+declare -a arrival_time=( 1 5 0 ) # Original (immutable)
 
 # Waiting Time
 declare -a wt=( $(for i in $(seq 1 $n); do echo 0; done) )
@@ -59,21 +59,17 @@ function findHighestResponseRatio(){
 	# Iterate through each responseRatio element
 	for i in ${process_IDs[@]}
 	do
+		# Check if process already arrived
 		if [[ ${at[$i]} -le $clock ]]
 		then
-		# If the element is -1, increase it by one
-			if [[ $((at[$i])) -eq -1 ]]
-			then
-				highest=$(($highest+1))
-			else
-				# Check if the value of the response ratio element is more than the highest (first) at this time
-	    		if [[ $((responseR[$i])) -ge $((responseR[$highest])) ]]
-	     		then
-	     			# If yes, set the current index of the response ratio element to the highest value
-	        		highest=$i
-	     		fi
-	     	fi
-	     fi
+		
+			# Check if the value of the response ratio element is more than the highest (first) at this time
+    		if [[ $((responseR[$i])) -ge $((responseR[$highest])) ]]
+     		then
+     			# If yes, set the current index of the response ratio element to the highest value
+        		highest=$i
+     		fi
+     	fi
 done
 # Return index of the highest value
 echo $highest
@@ -144,6 +140,7 @@ function getAllWaitingJobs() {
 			done
 
 			bt[$id]=0
+			at[$id]=$(($max_no+1))
 
 			# Calculate the turnaround time using the immutable arrival time array.
 			tat[$id]=$(($clock-${arrival_time[$id]}))

@@ -43,18 +43,13 @@ function findSmallest(){
 	# Iterate through each arrival time element
 	for i in $(seq 0 $len)
 	do
-		# If the element is -1, ignore it
-		if [[ $((at[$i])) -eq -1 ]]
-		then
-			continue
-		else
-			# Check if the value of the arrival time element is less then the smallest (first) at this time
-    		if [[ $((at[$i])) -lt $((at[$smallest])) ]]
-     		then
-     			# If yes, set the current index of the arrival time element to the smallest value
-        		smallest=$i
-     		fi
-     	fi
+
+		# Check if the value of the arrival time element is less then the smallest (first) at this time
+		if [[ $((at[$i])) -lt $((at[$smallest])) ]]
+ 		then
+ 			# If yes, set the current index of the arrival time element to the smallest value
+    		smallest=$i
+ 		fi
 done
 # Return index of the smallest value
 echo $smallest
@@ -138,3 +133,4 @@ done
 echo ${process_flow[@]}
 echo __w ${wt[@]}
 echo tat ${tat[@]}
+echo at ${at[@]}
