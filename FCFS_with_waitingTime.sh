@@ -125,7 +125,7 @@ do
 		bt[$id]=0
 		at[$id]=$(($max_no+1)) # IMPORTANT To Do: the algorithm is only working if the arrival time is set to high number.
 		
-		# Calculate the turnaround time using the imortal arrival time array.
+		# Calculate the turnaround time using the immutable arrival time array.
 		tat[$id]=$(($clock-${arrival_time[$id]}))
 	else
 		# If there is no process ready to process, add -1 to the process flow array
