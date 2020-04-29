@@ -1,13 +1,23 @@
 #! /bin/bash
 
 # Create some samples here that will later be replaced by the real output from the Algorithms
-process_names=( A B C D)
+process_names=( A B C D E )
 
 # Wichtig: Ich gehe hier davon aus das jedem Prozess der Reihenfolge nach eine nummer gegeben wird.
 # Also A -> 0, B -> 1, C -> 2 ... 
 # Und das in der Simulation nicht die namen in die Output Liste geschreiben werden, sondern eben die Nummer:
 # Die Output Liste sollte dann so aussehen:
-process_flow=(-1 1 1 1 2 2 2 3 3 3 1 2 2 2 3 3 3 2 2 3 -1 -1 0 0 0 0 0)
+process_flow=(-1 -1 3 3 3 0 0 0 1 1 1 1 1 4 4 4 4 4 4 2)
+
+##########################
+# Calculated through previous steps or user input
+# Arrival Time
+declare -a at=( 3 5 7 2 6 ) # Copy (mutable)
+declare -a arrival_time=( 3 5 7 2 6 ) # Original (immutable)
+
+# Turnaround Time
+declare -a tat=( 5 8 13 3 13 )
+##########################
 
 algorithm="Shortest Remaining Time First"
 
@@ -34,12 +44,14 @@ done
 #echo ${process_nums[*]}
 #echo ${output_data[*]}
 
-
-
+# Track each iteration
+ticker=0
 
 # Create the actual chart:
 for p in "${process_flow[@]}"
 do
+    ticker=$(($ticker+1))
+    # If no process is in the queue
     if [[ $p == -1 ]]
     then 
         for p2 in "${process_nums[@]}"
@@ -47,13 +59,20 @@ do
             output_data[$p2]=${output_data[$p2]}'░' # On every other processe's line a ░ gets added.
         done
     else
-
+        # If process is in the queue
         output_data[$p]=${output_data[$p]}'█' # In the line of the process that gets processed in this time unit a █ gets added.
+
+        # Add symbols to all processes which are not processed in this iteration
         for p2 in "${process_nums[@]}"
         do
-            if [[ $p2 != $p ]]
+            ct=$((${tat[$p2]}+${at[$p2]})) # Calculate completion time
+            # Add a ▒ if the process already arrived in the queue and is not finished.
+            if [[ $p2 != $p ]] && [[ ${at[$p2]} -lt $ticker ]] && [[ $ct -ge $ticker ]]
             then
-                output_data[$p2]=${output_data[$p2]}'░' # On every other processe's line a ░ gets added.
+                output_data[$p2]=${output_data[$p2]}'▒' # On every other processe's line a ░ gets added.
+            elif [[ $p2 != $p ]]
+                then
+                output_data[$p2]=${output_data[$p2]}'░' # Add ░ if process did not arrive
             fi
         done
     fi
@@ -88,7 +107,6 @@ do
 done
 echo "$time_line"
 echo_n 5
-
 
 
 
