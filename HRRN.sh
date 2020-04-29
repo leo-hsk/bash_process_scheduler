@@ -144,7 +144,6 @@ function getAllWaitingJobs() {
 			done
 
 			bt[$id]=0
-			at[$id]=$(($max_no+1)) # IMPORTANT To Do: the algorithm is only working if the arrival time is set to high number.
 
 			# Calculate the turnaround time using the immutable arrival time array.
 			tat[$id]=$(($clock-${arrival_time[$id]}))
@@ -159,4 +158,5 @@ function getAllWaitingJobs() {
 
 	echo ${process_flow[@]}
 	echo tat ${tat[@]}
+	echo at ${at[@]}
 	
