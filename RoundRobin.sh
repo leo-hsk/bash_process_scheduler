@@ -17,7 +17,7 @@ declare -a process_IDs=( 0 1 2 3 4 )
 declare -a bt=( 2 3 6 8 1  )
 
 # Arrival Time
-declare -a at=( 2 9 8 18 3 7 ) # Copy (mutable)
+declare -a at=( 5 8 7 0 1 ) # Copy (mutable)
 declare -a arrival_time=( 3 5 7 2 6 ) # Original (immutable)
 
 # Waiting Time
@@ -88,6 +88,27 @@ function get_next_in_queue(){
     fi
 
 }
+
+function getAllWaitingJobs() {
+
+    # Reset the isWaiting array to all zeros
+    for i in ${process_IDs[@]}
+    do
+        isWaiting[$i]=0
+    done
+
+    for p in ${process_IDs[@]}
+    do
+        if [[ $((at[$p]-$clock)) -le 0 ]]
+        then
+            isWaiting[$p]=1
+        fi
+    done
+    # Controlling
+    # echo "Finished" ${isWaiting[@]}
+
+}
+
 make_order 44
 
 while [ $(IFS=+; echo "$((${bt[*]}))") -gt 0 ]  # This summs up the whole burst time array, if EVERY process has a burst time of 0 we are done. As long as that is not the case, do all this again and agin:
@@ -105,7 +126,27 @@ do
             fi 
             for i in $( seq 1 $service_units )  # Now do the following steps for *service_units* times.
                 do
+
+                    getAllWaitingJobs
+                    # Update waiting times each iteration for every process other than id
+                    for p in $(seq 0 $((${#isWaiting[@]}-1))) 
+                    do
+                        if [[ $p -ne $id ]]
+                        then
+                            wt[$p]=$((wt[$p]+isWaiting[$p]))
+                            echo c $clock
+                            echo p $p
+                            echo wt ${wt[@]}
+                            echo is ${isWaiting[$p]}
+                            echo - - -
+                        fi
+                    done
+
                     process_flow[$clock]=$id  # Add the id of the process to the process_flow array
+                    
+
+
+
                     clock=$(($clock+1))  # Increase clock by one.
                     make_order $id  # Call the make order function and pass id, beacuse we do not want to include id in the queue since it is processed at the moment. If another process comes in at that moment of time, the other processes must get the spot in queue infront of theone processed right now.
                 done
@@ -113,6 +154,8 @@ do
             
             # Update the burst time.
             bt[$id]=$((${bt[$id]}-$service_units))
+            if [[ ${bt[$id]} -eq 0 ]]
+            then 
 
         fi            
     else
@@ -128,3 +171,4 @@ done
 echo 
 echo RoundRobin Output:
 echo ${process_flow[@]}
+echo ${wt[@]}

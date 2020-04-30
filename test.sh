@@ -3,11 +3,22 @@
 #myvar="$( awk -v var="$a" -v var2="$b" 'BEGIN {print ((var/var2)+1)*100000}' )"
 #printf $myvar
 
-clock=2
-service_units=3
+queue=( 17 11 4 )
 
-for i in $( seq $clock $(($clock+$service_units-1)))
-    do
-        echo hi
+function take_out_first() {
+    x=${queue[0]}
+    queue=("${queue[@]:1}")
+    return $x
 
-    done
+}
+
+
+take_out_first
+y=$?
+echo $y
+echo q ${queue[@]}
+queue+=(99)
+take_out_first
+y=$?
+echo $y
+echo q ${queue[@]}
