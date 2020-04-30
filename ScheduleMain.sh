@@ -9,8 +9,9 @@ echo "Please choose one of the following Options:\n\n"
 echo "1. Go to Simulations"
 echo "2. Get a Overview about the features"
 echo "3. Run FCFS Scheduling"
-echo "4. Show Gant Chart"
-echo "5. Exit the Program"
+echo "4. Run Round Robin Scheduling"
+echo "5. Show Gant Chart"
+echo "6. Exit the Program"
 
 echo "Please take one of the 5 Options and press Enter."
 read choise
@@ -26,14 +27,17 @@ case "$choise" in
 			. ./FCFS.sh
 			;;
 				4)
-				. ./CreateChart.sh
+				. ./RoundRobin.sh
 				;;
 					5)
-					Exit
+					. ./CreateChart.sh
 					;;
+						6)
+						Exit
+						;;
 					esac
 
-echo "Would you like to pick another Testrun ? (Y/N) \n"
+echo "\n\n Would you like to pick another Testrun ? (Y/N) \n"
 read yesno
 case "$yesno" in
 	y*|Y*)
