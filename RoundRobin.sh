@@ -155,7 +155,9 @@ do
             # Update the burst time.
             bt[$id]=$((${bt[$id]}-$service_units))
             if [[ ${bt[$id]} -eq 0 ]]
-            then 
+            then
+                continue # Hier kommt der code zum errechnen der Waiting Time hin
+            fi
 
         fi            
     else
