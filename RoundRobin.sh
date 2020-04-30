@@ -14,7 +14,7 @@ declare -a process_names=( A B C D E )
 declare -a process_IDs=( 0 1 2 3 4 )
 
 # List of burst time
-declare -a bt=( 2 3 6 8 1  )
+declare -a bt=( 2 3 6 8 1 )
 
 # Arrival Time
 declare -a at=( 5 8 7 0 1 ) # Copy (mutable)
@@ -99,7 +99,7 @@ function getAllWaitingJobs() {
 
     for p in ${process_IDs[@]}
     do
-        if [[ $((at[$p]-$clock)) -le 0 ]]
+        if [[ $((at[$p]-$clock)) -le 0 ]] && [[ ${bt[$p]} -gt 0 ]]
         then
             isWaiting[$p]=1
         fi
@@ -154,10 +154,6 @@ do
             
             # Update the burst time.
             bt[$id]=$((${bt[$id]}-$service_units))
-            if [[ ${bt[$id]} -eq 0 ]]
-            then
-                continue # Hier kommt der code zum errechnen der Waiting Time hin
-            fi
 
         fi            
     else
