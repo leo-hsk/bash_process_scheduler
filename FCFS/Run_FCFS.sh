@@ -30,53 +30,14 @@ declare -a tat=( $(for i in $(seq 1 $n); do echo 0; done) )
 #output of the "function"
 declare -a process_flow=()
 
+##############################################################
 
+########## DELETE FOR FINAL IMPLEMENTATION
+export processSchedulerWorkingDir=$(pwd)
 
-# Return idex of the smallest value in the arrival array
-function findSmallest(){
-	# Start with index 0
-	smallest=0
-
-	# Get length -1 of the arrival time array
-	let len=${#at[*]}-1
-
-	# Iterate through each arrival time element
-	for i in $(seq 0 $len)
-	do
-
-		# Check if the value of the arrival time element is less then the smallest (first) at this time
-		if [[ $((at[$i])) -lt $((at[$smallest])) ]]
- 		then
- 			# If yes, set the current index of the arrival time element to the smallest value
-    		smallest=$i
- 		fi
-done
-# Return index of the smallest value
-echo $smallest
-
-}
-
-function getAllWaitingJobs() {
-
-	# Reset the isWaiting array to all zeros
-	for i in $(seq 0 $((${#isWaiting[@]}-1)))
-	do
-		isWaiting[$i]=0
-	done
-
-	for p in ${process_IDs[@]}
-	do
-		if [[ $((at[$p]-$clock)) -le 0 ]]
-		then
-			isWaiting[$p]=1
-		fi
-	done
-	# Controlling
-	# echo "Finished" ${isWaiting[@]}
-
-}
-
-
+############# FOR FINAL IMPLEMENTATION CHANGE TO:	source ${processSchedulerWorkingDir}/FCFS/xxxxxxxxxxx.sh
+source ${processSchedulerWorkingDir}/findSmallestValue.sh
+source ${processSchedulerWorkingDir}/getAllWaitingJobs.sh
 
 # Track the no. of iterations
 clock=0
@@ -85,7 +46,8 @@ clock=0
 while [ $(IFS=+; echo "$((${bt[*]}))") -gt 0 ]
 do
 	# Find index of the smallest arrival time
-	id=$(findSmallest)
+	
+	id=$(findSmallestValue)
 	let tmp=${at[$id]}-$clock
 
 	if [[ $tmp -le 0 ]]
@@ -131,6 +93,6 @@ do
 done
 
 echo ${process_flow[@]}
-echo __w ${wt[@]}
-echo tat ${tat[@]}
-echo at ${at[@]}
+#echo __w ${wt[@]}
+#echo tat ${tat[@]}
+#echo at ${at[@]}

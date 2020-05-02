@@ -11,7 +11,7 @@
 #                                                                                           #
 #############################################################################################
 
-function findSmallest(){
+function findSmallestValue(){
 	# Start with index 0
 	smallest=0
 
