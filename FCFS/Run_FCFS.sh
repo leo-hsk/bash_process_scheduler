@@ -34,7 +34,7 @@ declare -a process_flow=()
 
 ########## DELETE FOR FINAL IMPLEMENTATION
 export processSchedulerWorkingDir=$(pwd)
-mainDir=/c/Users/Leonard/Projects/bash_process_scheduler
+mainDir=/c/Users/Leonard/Projects/bash_process_scheduler # Only for testing purposes
 
 ############# FOR FINAL IMPLEMENTATION CHANGE TO:	source ${processSchedulerWorkingDir}/FCFS/xxxxxxxxxxx.sh
 source ${processSchedulerWorkingDir}/findSmallestValue.sh
