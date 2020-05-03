@@ -19,7 +19,7 @@ source ${processSchedulerWorkingDir}/common/importHeader.sh
 
 # Configure logging unit
 logFileName=${processSchedulerWorkingDir}/_log_/$(date +"%Y-%m-%d")_$(date +"%H-%M-%S")_VERSION=${version}
-create_logfile ${logFilePath}
+# create_logfile ${logFilePath} # Uncomment if implemented 
 
 echo "############################################################"
 echo "#              Process Scheduling Simulator                #"
