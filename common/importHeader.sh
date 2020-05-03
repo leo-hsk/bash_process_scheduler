@@ -33,3 +33,9 @@ export process_IDs=( 0 1 2 3 4 )
 
 export max_no=75 # Max no. of allowed gantt chart characters
 export n=5 # No. of sample processes
+
+export process_flow=()
+
+export tat=( $(for i in $(seq 1 $n); do echo 0; done) )
+export wt=( $(for i in $(seq 1 $n); do echo 0; done) )
+
