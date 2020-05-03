@@ -6,19 +6,19 @@
 max_no=75
 
 # No. of (sample) processes
-n=5
+n=3
 
-declare -a process_names=( A B C D E )
+declare -a process_names=( A B C )
 
 # List of process IDs
-declare -a process_IDs=( 0 1 2 3 4 )
+declare -a process_IDs=( 0 1 2 )
 
 # List of burst time
-declare -a bt=( 2 3 6 8 1 )
+declare -a bt=( 3 4 7 )
 
 # Arrival Time
-declare -a at=( 5 8 7 0 1 ) # Copy (mutable)
-declare -a arrival_time=( 3 5 7 2 6 ) # Original (immutable)
+declare -a at=( 0 0 3 ) # Copy (mutable)
+declare -a arrival_time=( 0 0 3 ) # Original (immutable)
 
 # Waiting Time
 declare -a wt=( $(for i in $(seq 1 $n); do echo 0; done) )
@@ -35,7 +35,7 @@ declare -a process_flow=()
 declare -a queue=()
 
 
-quantum=4
+quantum=2
 
 clock=0  # This is the simulations clock = passed time since start.
 
@@ -154,10 +154,12 @@ do
             
             # Update the burst time.
             bt[$id]=$((${bt[$id]}-$service_units))
+            # Calculate the turnaround time using the immutable arrival time array.
+            tat[$id]=$(($clock-${arrival_time[$id]})) 
 
-        fi            
+        fi           
     else
-        # If there is no process ready to process, add -1 to the process flow array
+        # If there is no process ready to process, add -1 to the process flow array.
         process_flow[$clock]=-1
         clock=$(($clock+1))
         make_order 44  # Call make order to add new processes that might appeared in the clock increase by one.
@@ -167,6 +169,7 @@ do
 done
 
 echo 
-echo RoundRobin Output:
 echo ${process_flow[@]}
-echo ${wt[@]}
+echo __w ${wt[@]}
+echo tat ${tat[@]}
+echo _at ${at[@]}
