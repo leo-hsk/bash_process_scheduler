@@ -40,7 +40,7 @@ quantum=2
 clock=0  # This is the simulations clock = passed time since start.
 
 
-function is_in_order() {
+function isInOrder() {
     # If the passsed process is alredy in the queue return 1. If not return 0.
     for p2 in ${queue[@]}  # Loop all processes in queue.
     do 
@@ -54,13 +54,13 @@ function is_in_order() {
     return 0
 }
 
-function make_order() {
+function makeOrder() {
     # This function updates the queue list. 
     for p in ${process_IDs[@]}  # Loop all processes there are.
     do 
         if [[ $p -ne $1 ]]  # One can pass a process_id as an argument and the one wont be put in queue.
         then
-            is_in_order $p  # Check if the process is already in queue 1=YES, 0=NO.
+            isInOrder $p  # Check if the process is already in queue 1=YES, 0=NO.
             x=$?  # Store the 1 or 0 in x.
             if [[ ${at[$p]} -le $clock ]]  && [[ $x -eq 0 ]]  # Check if the process has already arrived. And is not already in queue.
             then
@@ -74,7 +74,7 @@ function make_order() {
 }
 
 
-function get_next_in_queue(){
+function getNextInQueue(){
     # This function returns the next process_id in the queue and at the same time removes it from the queue.
     # If there is nothing in the queue it returns a 44 (44 because -1 does not work - turns it into a 255 wegen zweierkompliment - and 44 is ok because the max number of processes is 25 anyway.).
     if [[ ${#queue[@]} -gt 0 ]]
@@ -109,11 +109,11 @@ function getAllWaitingJobs() {
 
 }
 
-make_order 44
+makeOrder 44
 
 while [ $(IFS=+; echo "$((${bt[*]}))") -gt 0 ]  # This summs up the whole burst time array, if EVERY process has a burst time of 0 we are done. As long as that is not the case, do all this again and agin:
 do
-    get_next_in_queue  # Get the next process in queue by calling the function.
+    getNextInQueue  # Get the next process in queue by calling the function.
     id=$?  # Store the output inside the variable id.
     if [[ $id -ne 44 ]]  # The function returns a 44 in the case the queue is empty, meaning no process is waiting -> skip to else to increase clock by one.
     then 
@@ -148,9 +148,9 @@ do
 
 
                     clock=$(($clock+1))  # Increase clock by one.
-                    make_order $id  # Call the make order function and pass id, beacuse we do not want to include id in the queue since it is processed at the moment. If another process comes in at that moment of time, the other processes must get the spot in queue infront of theone processed right now.
+                    makeOrder $id  # Call the make order function and pass id, beacuse we do not want to include id in the queue since it is processed at the moment. If another process comes in at that moment of time, the other processes must get the spot in queue infront of theone processed right now.
                 done
-                make_order 44  # Now we need to call make order again, because id might not be finished and so must be put in the queue, but we excluded it inside the loop.
+                makeOrder 44  # Now we need to call make order again, because id might not be finished and so must be put in the queue, but we excluded it inside the loop.
             
             # Update the burst time.
             bt[$id]=$((${bt[$id]}-$service_units))
@@ -162,7 +162,7 @@ do
         # If there is no process ready to process, add -1 to the process flow array.
         process_flow[$clock]=-1
         clock=$(($clock+1))
-        make_order 44  # Call make order to add new processes that might appeared in the clock increase by one.
+        makeOrder 44  # Call make order to add new processes that might appeared in the clock increase by one.
     fi
 
 
