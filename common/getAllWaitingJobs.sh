@@ -2,7 +2,7 @@
 
 #############################################################################################
 #                                                                                           #
-# This shell script controls the Process Scheduler Simulation.                              #
+# This shell script fills a list with boolean values whether the process is waiting or not. #
 # Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
 #          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
 #          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
@@ -11,16 +11,22 @@
 #                                                                                           #
 #############################################################################################
 
-# Export working directory
-export processSchedulerWorkingDir=$(pwd)
+function getAllWaitingJobs() {
 
-# Import configuration
-source ${processSchedulerWorkingDir}/common/importHeader.sh
+	# Reset the isWaiting array to all zeros
+	for i in $(seq 0 $((${#isWaiting[@]}-1)))
+	do
+		isWaiting[$i]=0
+	done
 
-# Configure logging unit
-logFileName=${processSchedulerWorkingDir}/_log_/$(date +"%Y-%m-%d")_$(date +"%H-%M-%S")_VERSION=${version}
-# create_logfile ${logFilePath} # Uncomment if implemented 
+	for p in ${process_IDs[@]}
+	do
+		if [[ $((at[$p]-$clock)) -le 0 ]]
+		then
+			isWaiting[$p]=1
+		fi
+	done
+	# Controlling
+	# echo "Finished" ${isWaiting[@]}
 
-echo "############################################################"
-echo "#              Process Scheduling Simulator                #"
-echo "############################################################"
+}

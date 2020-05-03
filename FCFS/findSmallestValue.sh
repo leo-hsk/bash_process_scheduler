@@ -2,7 +2,7 @@
 
 #############################################################################################
 #                                                                                           #
-# This shell script controls the Process Scheduler Simulation.                              #
+# This shell script returns the index of the element with the smallest value.               #
 # Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
 #          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
 #          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
@@ -11,16 +11,25 @@
 #                                                                                           #
 #############################################################################################
 
-# Export working directory
-export processSchedulerWorkingDir=$(pwd)
+function findSmallestValue(){
+	# Start with index 0
+	smallest=0
 
-# Import configuration
-source ${processSchedulerWorkingDir}/common/importHeader.sh
+	# Get length -1 of the arrival time array
+	let len=${#at[*]}-1
 
-# Configure logging unit
-logFileName=${processSchedulerWorkingDir}/_log_/$(date +"%Y-%m-%d")_$(date +"%H-%M-%S")_VERSION=${version}
-# create_logfile ${logFilePath} # Uncomment if implemented 
+	# Iterate through each arrival time element
+	for i in $(seq 0 $len)
+	do
 
-echo "############################################################"
-echo "#              Process Scheduling Simulator                #"
-echo "############################################################"
+		# Check if the value of the arrival time element is less then the smallest (first) at this time
+		if [[ $((at[$i])) -lt $((at[$smallest])) ]]
+ 		then
+ 			# If yes, set the current index of the arrival time element to the smallest value
+    		smallest=$i
+ 		fi
+done
+# Return index of the smallest value
+echo $smallest
+
+}

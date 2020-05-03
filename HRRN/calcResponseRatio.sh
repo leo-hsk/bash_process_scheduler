@@ -2,7 +2,7 @@
 
 #############################################################################################
 #                                                                                           #
-# This shell script controls the Process Scheduler Simulation.                              #
+# This shell script calculates the response ratio and converts it into integers.            #
 # Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
 #          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
 #          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
@@ -11,16 +11,17 @@
 #                                                                                           #
 #############################################################################################
 
-# Export working directory
-export processSchedulerWorkingDir=$(pwd)
-
-# Import configuration
-source ${processSchedulerWorkingDir}/common/importHeader.sh
-
-# Configure logging unit
-logFileName=${processSchedulerWorkingDir}/_log_/$(date +"%Y-%m-%d")_$(date +"%H-%M-%S")_VERSION=${version}
-# create_logfile ${logFilePath} # Uncomment if implemented 
-
-echo "############################################################"
-echo "#              Process Scheduling Simulator                #"
-echo "############################################################"
+function calcResponseRatio() {
+	# Reset the isWaiting array to all zeros
+	for p in ${process_IDs[@]}
+	do
+		# Calculate response ratio fo each process * 1000
+		if [[ ${bt[$p]} -eq 0 ]]
+		then
+			responseR[$p]=0
+		else
+			rratio=$(bc <<< "scale=0;(${wt[$p]}+${bt[$p]})*1000/${bt[$p]}")
+			responseR[$p]=$rratio
+		fi
+	done
+}

@@ -24,3 +24,12 @@ else
 	echo "Aborting."
 	exit 1
 fi
+
+## Declare global variables
+export arrival_time=( 3 5 7 2 6 )
+export burst_time=( 3 5 1 3 6 )
+export process_names=( A B C D E )
+export process_IDs=( 0 1 2 3 4 )
+
+export max_no=75 # Max no. of allowed gantt chart characters
+export n=5 # No. of sample processes

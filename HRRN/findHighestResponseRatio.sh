@@ -2,7 +2,7 @@
 
 #############################################################################################
 #                                                                                           #
-# This shell script controls the Process Scheduler Simulation.                              #
+# This shell script returns the index of the element with the highest response ratio.       #
 # Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
 #          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
 #          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
@@ -11,16 +11,27 @@
 #                                                                                           #
 #############################################################################################
 
-# Export working directory
-export processSchedulerWorkingDir=$(pwd)
+function findHighestResponseRatio(){
+	# Start with index 0
 
-# Import configuration
-source ${processSchedulerWorkingDir}/common/importHeader.sh
+	highest=0
 
-# Configure logging unit
-logFileName=${processSchedulerWorkingDir}/_log_/$(date +"%Y-%m-%d")_$(date +"%H-%M-%S")_VERSION=${version}
-# create_logfile ${logFilePath} # Uncomment if implemented 
+	# Iterate through each responseRatio element
+	for i in ${process_IDs[@]}
+	do
+		# Check if process already arrived
+		if [[ ${at[$i]} -le $clock ]]
+		then
+		
+			# Check if the value of the response ratio element is more than the highest (first) at this time
+    		if [[ $((responseR[$i])) -ge $((responseR[$highest])) ]]
+     		then
+     			# If yes, set the current index of the response ratio element to the highest value
+        		highest=$i
+     		fi
+     	fi
+done
+# Return index of the highest value
+echo $highest
 
-echo "############################################################"
-echo "#              Process Scheduling Simulator                #"
-echo "############################################################"
+}
