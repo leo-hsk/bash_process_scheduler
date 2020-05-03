@@ -12,22 +12,24 @@ n=5
 max_no=75
 
 # List of process names
-declare -a process_names=( 1 2 3 4 5 )
+export process_names=( 1sds 2 3ss 42 5 )
 
 # List of process IDs. The IDs represent the index of the process.
-declare -a process_IDs=( 0 1 2 3 4 )
+export process_IDs=( 0 1 2 3 4 )
 
 # List of burst time
-declare -a bt=( 5 3 8 6 7 )
+export bt=( 5 3 8 6 7 )
 
 # Arrival Time
-declare -a at=( 0 1 2 3 5 )
+export at=( 0 1 2 3 5 )
 
 # error color
 red=$'\e[1;31m'
 
 # white color
 end=$'\e[0m'
+
+export processSchedulerWorkingDir=$(pwd)
 
 
 
@@ -59,10 +61,13 @@ then
 	done
 
 	## Empty arrays
-	declare -a process_names=( )
-	declare -a process_IDs=( )
-	declare -a bt=( )
-	declare -a at=( )
+	export process_names=( )
+	export process_IDs=( $(seq 0 1 $((n-1))) )
+	export bt=( )
+	export at=( )
+
+	export tat=( $(for i in $(seq 1 $n); do echo 0; done) )
+	export wt=( $(for i in $(seq 1 $n); do echo 0; done) )
 
 	### declare each process
 	for i in $(seq 0 $(($n-1)))
@@ -106,30 +111,11 @@ then
 		# Assign input value to the array element
 		bt[$i]=$tmp
 	done
-
-	clear -x
-
-	### Use processes
-	printf "\n\nPROCESSES OVERVIEW\n\n"
-	printf "Process   Arrival Time   Burst Time\n\n"
-	for i in $(seq 0 $(($n-1)))
-	do
-		printf "%3s  %10s  %12s" "${process_names[$i]}" "${at[$i]}" "${bt[$i]}"
-		printf "\n"
-
-	done
-
-
-else
-	clear -x
-
-	#### Yy: Use sample processes
-	printf "\n\nSAMPLE PROCESSES OVERVIEW\n\n"
-	printf "Process   Arrival Time   Burst Time\n\n"
-	for i in $(seq 0 $(($n-1)))
-	do
-		printf "%3s  %10s  %12s" "${process_names[$i]}" "${at[$i]}" "${bt[$i]}"
-		printf "\n"
-
-	done
 fi
+
+
+clear -x
+
+#### Create Overview
+
+source ${processSchedulerWorkingDir}/createProcessOverview.sh
