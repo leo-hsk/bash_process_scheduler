@@ -34,10 +34,11 @@ declare -a process_flow=()
 
 ########## DELETE FOR FINAL IMPLEMENTATION
 export processSchedulerWorkingDir=$(pwd)
+mainDir=/c/Users/Leonard/Projects/bash_process_scheduler
 
 ############# FOR FINAL IMPLEMENTATION CHANGE TO:	source ${processSchedulerWorkingDir}/FCFS/xxxxxxxxxxx.sh
 source ${processSchedulerWorkingDir}/findSmallestValue.sh
-source ${processSchedulerWorkingDir}/getAllWaitingJobs.sh
+source ${mainDir}/common/getAllWaitingJobs.sh
 
 # Track the no. of iterations
 clock=0

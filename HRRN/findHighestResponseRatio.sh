@@ -2,7 +2,7 @@
 
 #############################################################################################
 #                                                                                           #
-# This shell script fills a list with boolean values whether the process is waiting or not. #
+# This shell script returns the index of the element with the highest response ratio.       #
 # Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
 #          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
 #          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
@@ -11,22 +11,27 @@
 #                                                                                           #
 #############################################################################################
 
-function getAllWaitingJobs() {
+function findHighestResponseRatio(){
+	# Start with index 0
 
-	# Reset the isWaiting array to all zeros
-	for i in $(seq 0 $((${#isWaiting[@]}-1)))
-	do
-		isWaiting[$i]=0
-	done
+	highest=0
 
-	for p in ${process_IDs[@]}
+	# Iterate through each responseRatio element
+	for i in ${process_IDs[@]}
 	do
-		if [[ $((at[$p]-$clock)) -le 0 ]]
+		# Check if process already arrived
+		if [[ ${at[$i]} -le $clock ]]
 		then
-			isWaiting[$p]=1
-		fi
-	done
-	# Controlling
-	# echo "Finished" ${isWaiting[@]}
+		
+			# Check if the value of the response ratio element is more than the highest (first) at this time
+    		if [[ $((responseR[$i])) -ge $((responseR[$highest])) ]]
+     		then
+     			# If yes, set the current index of the response ratio element to the highest value
+        		highest=$i
+     		fi
+     	fi
+done
+# Return index of the highest value
+echo $highest
 
 }
