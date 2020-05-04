@@ -24,3 +24,21 @@ logFileName=${processSchedulerWorkingDir}/_log_/$(date +"%Y-%m-%d")_$(date +"%H-
 echo "############################################################"
 echo "#              Process Scheduling Simulator                #"
 echo "############################################################"
+
+
+#Print usage if param1 is not a valid value
+if [[ $1 != "" ]]
+then
+  if ( [ $1 = "--help" ] ||  [ $1 != "--resume" ] )
+  then
+    echo "Print HELP here"
+    exit 0
+  fi
+fi
+
+# Main programm loop
+while [[ $isExit -ne 1 ]]
+do
+	
+	isExit=1
+done
