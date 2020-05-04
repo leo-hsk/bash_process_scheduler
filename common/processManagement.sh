@@ -13,14 +13,26 @@
 
 processesFilePath=${releaseCreatorWorkingDir}/.processes.log
 
-setProcesses() {
+function setProcesses() {
 	######## Needs to be implemented
+	# Create hidden file
+	# save processes into the file (name, waiting time, burst time, maybe no of processes?)
+
 }
 
-getProcesses() {
+function getProcesses() {
 	######## Needs to be implemented
+	# read data from file
+	# add data to arrays
 }
 
-remProcesses() {
+function remProcesses() {
   rm -f ${processesFilePath}
+}
+
+function checkIfProcessesExist() {
+	######## Needs to be implemented
+	# Check if file exists
+	# If not: print message that there are no saved processses and exit script
+
 }
