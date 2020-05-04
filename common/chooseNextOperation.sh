@@ -24,14 +24,14 @@ choice=$?
 
 if [[ $choice -eq 0 ]]
 then
-	echo "hi"
+	continue
 
 elif [[ $choice -eq 1 ]]
 then
-	echo "test1"
+	break 1
 
 elif [[ choice -eq 2 ]]
 then
 	isExit=1
-	echo "Abort program."
+	echo "Aborting program."
 fi
