@@ -55,29 +55,34 @@ do
 		source ${processSchedulerWorkingDir}/EverythingNotFinished/start_screen.sh
 	fi
 
-	
+    source ${processSchedulerWorkingDir}/FCFS/echotest.sh
 	source ${processSchedulerWorkingDir}/common/createProcessOverview.sh
 	printf "\n"
 	${processSchedulerWorkingDir}/common/sleep.sh 15
 	printf "\n"
 
-
+    declare -a process_flow=()
+    
 	while [[ $isExit -ne 1 ]]
 	do
-		${processSchedulerWorkingDir}/common/chooseAlgorithm.sh
+		source ${processSchedulerWorkingDir}/common/chooseAlgorithm.sh
+        echo $algo_choice
+		if [ $algo_choice = "FCFS" ]
+		then
+            source ${processSchedulerWorkingDir}/FCFS/Run_FCFS.sh
+			
 
-		if [ $? = "FCFS" ]
+		elif [ $algo_choice = "HRRN" ]
 		then
-			echo "FCFS"
-
-		elif [ $? = "HRRN" ]
+            source ${processSchedulerWorkingDir}/HRRN/Run_HRRN.sh
+   
+   
+		elif [ $algo_choice = "RoundRobin" ]
 		then
-			echo "HRRN" 
-		elif [ $? = "RoundRobin" ]
-		then
-			echo "RoundRobin"
+            source ${processSchedulerWorkingDir}/ROUNDROBIN/Run_RoundRobin.sh
 		fi
-
+        
+        echo 'process_flow' ${process_flow[@]}
 		echo "createChart"
 		${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
 		printf "\n"

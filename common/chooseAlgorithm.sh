@@ -13,12 +13,12 @@
 
 source ${processSchedulerWorkingDir}/common/selectOptions.sh
 
-echo "Select one algorithm using up/down keys and enter to confirm:"
-echo
+printf "Select one algorithm using up/down keys and enter to confirm:\n\n"
 
 options=("FCFS" "HRRN" "RoundRobin")
 
 select_option "${options[@]}"
 choice=$?
 
-echo "${options[$choice]}"
+# echo "${options[$choice]}"
+algo_choice=${options[$choice]}

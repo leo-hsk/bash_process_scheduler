@@ -27,18 +27,13 @@ isWaiting=( $(for i in $(seq 1 $n); do echo 0; done) )
 # Turnaround Time
 declare -a tat=( $(for i in $(seq 1 $n); do echo 0; done) )
 
-#output of the "function"
-declare -a process_flow=()
 
 ##############################################################
 
-########## DELETE FOR FINAL IMPLEMENTATION
-export processSchedulerWorkingDir=$(pwd)
-mainDir=/c/Users/Leonard/Projects/bash_process_scheduler # Only for testing purposes
 
 ############# FOR FINAL IMPLEMENTATION CHANGE TO:	source ${processSchedulerWorkingDir}/FCFS/xxxxxxxxxxx.sh
-source ${processSchedulerWorkingDir}/findSmallestValue.sh
-source ${mainDir}/common/getAllWaitingJobs.sh
+source ${processSchedulerWorkingDir}/FCFS/findSmallestValue.sh
+source ${processSchedulerWorkingDir}/common/getAllWaitingJobs.sh
 
 # Track the no. of iterations
 clock=0
@@ -93,7 +88,7 @@ do
 	fi
 done
 
-echo ${process_flow[@]}
+#echo ${process_flow[@]}
 #echo __w ${wt[@]}
 #echo tat ${tat[@]}
 #echo at ${at[@]}
