@@ -48,7 +48,7 @@ do
 		echo "checkiffileexists"
 		echo "load arrays"
 		
-		set -- ""
+		set -- "" # change command line parameter to ""
 
 	else
 		# Code is not clean.
@@ -64,6 +64,7 @@ do
 
 	while [[ $isExit -ne 1 ]]
 	do
+		# maybe selecting algorithm with cursor arrows?
 		echo "choose alg"
 
 		echo "createChart"
