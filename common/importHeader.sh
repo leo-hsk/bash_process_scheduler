@@ -33,6 +33,7 @@ export process_IDs=( 0 1 2 3 4 )
 
 export max_no=75 # Max no. of allowed gantt chart characters
 export n=5 # No. of sample processes
+export isExit=0
 
 export process_flow=()
 
