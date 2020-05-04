@@ -2,7 +2,7 @@
 
 #############################################################################################
 #                                                                                           #
-# This shell script pauses the script for given seconds.                                    #
+# This shell script returns the next process id in the queue. And than removes it from it.  #
 # Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
 #          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
 #          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
@@ -11,14 +11,18 @@
 #                                                                                           #
 #############################################################################################
 
-IFS=''
-for (( i=$1; i>0; i--))
-do
-	printf "\rYou have %02d seconds left to review processes or press [ENTER]" ${i}
-	read -s -n 1 -t 1 key  # Does not work on mac yet. -N is not an option, like this it only skips one second.
 
-	if [ "$key" == $'\x0a' ] # '\x0a' is Enter
-	then
-		break
-	fi
-done
+function getNextInQueue(){
+    # This function returns the next process_id in the queue and at the same time removes it from the queue.
+    # If there is nothing in the queue it returns a 44 (44 because -1 does not work - turns it into a 255 wegen zweierkompliment - and 44 is ok because the max number of processes is 25 anyway.).
+    if [[ ${#queue[@]} -gt 0 ]]
+    then
+        x=${queue[0]}
+        queue=("${queue[@]:1}")
+        return $x
+    else
+        return 44  # Returns a 44 if queue is empty. There cant be 44 processes - 25 is the max for this simulator.
+
+    fi
+
+}

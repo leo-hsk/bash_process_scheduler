@@ -1,6 +1,16 @@
 #!/bin/bash
 
-############ input
+#############################################################################################
+#                                                                                           #
+# This is our implementation of the Round Robin scheduling algorithm.                       #
+# Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
+#          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
+#          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
+#                                                                                           #
+# Copyright (c) 2020-2020 Anton Rösler, Leonard Hußke, Patrick Frech.  All Rights Reserved. #
+#                                                                                           #
+#############################################################################################
+
 
 # Max no. of gantt chart characters
 max_no=75
@@ -56,20 +66,20 @@ do
     getNextInQueue  # Get the next process in queue by calling the function.
     id=$?  # Store the output inside the variable id.
     if [[ $id -ne 44 ]]  # The function returns a 44 in the case the queue is empty, meaning no process is waiting -> skip to else to increase clock by one.
-    then 
+    then
         service_units=${bt[$id]}  # The Service time for round robin is the time slice / quantum but it might be the case that a processes as less than quantum units left.
-        if [ $service_units -gt 0 ]  # If service units is greater then 0 -> continue. If it is 0 the process is already fully completed. 
+        if [ $service_units -gt 0 ]  # If service units is greater then 0 -> continue. If it is 0 the process is already fully completed.
         then
             if [ $service_units -gt $quantum ]  # In the likely case the service units are larger than the time quantum: reduce to quantum.
-            then 
-                service_units=$quantum  # If the Process has more than 3 (or whatever value quantum has) time units of service left, it gets shortend to the value of quantum. 
-            fi 
+            then
+                service_units=$quantum  # If the Process has more than 3 (or whatever value quantum has) time units of service left, it gets shortend to the value of quantum.
+            fi
             for i in $( seq 1 $service_units )  # Now do the following steps for *service_units* times.
                 do
 
                     getAllWaitingJobs
                     # Update waiting times each iteration for every process other than id
-                    for p in $(seq 0 $((${#isWaiting[@]}-1))) 
+                    for p in $(seq 0 $((${#isWaiting[@]}-1)))
                     do
                         if [[ $p -ne $id ]]
                         then
@@ -95,9 +105,9 @@ do
             # Update the burst time.
             bt[$id]=$((${bt[$id]}-$service_units))
             # Calculate the turnaround time using the immutable arrival time array.
-            tat[$id]=$(($clock-${arrival_time[$id]})) 
+            tat[$id]=$(($clock-${arrival_time[$id]}))
 
-        fi           
+        fi
     else
         # If there is no process ready to process, add -1 to the process flow array.
         process_flow[$clock]=-1
@@ -108,7 +118,7 @@ do
 
 done
 
-echo 
+echo
 echo ${process_flow[@]}
 echo __w ${wt[@]}
 echo tat ${tat[@]}
