@@ -36,9 +36,41 @@ then
   fi
 fi
 
+
+isExit=3
 # Main programm loop
 while [[ $isExit -ne 1 ]]
 do
+
+	if [[ $1  = "--resume" ]]
+	then
+		# Have a look into the processManagement file
+		echo "checkiffileexists"
+		echo "load arrays"
+		
+		set -- ""
+
+	else
+		echo "start_screen"
+	fi
+
 	
-	isExit=1
+	source ${processSchedulerWorkingDir}/common/createProcessOverview.sh
+	printf "\n"
+	${processSchedulerWorkingDir}/common/sleep.sh 15
+
+
+	while [[ $isExit -ne 1 ]]
+	do
+		echo "choose alg"
+
+		
+		echo "avg wt tat"
+
+		echo "what do u wanna do?"
+		break # only for testing
+	done
+
+	isExit=$(($isExit-1))
+	#isExit=1
 done
