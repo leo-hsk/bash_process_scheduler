@@ -2,7 +2,7 @@
 
 #############################################################################################
 #                                                                                           #
-# This shell script calculates the waiting time and burst time.                             #
+# This shell script returns the next process id in the queue. And than removes it from it.  #
 # Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
 #          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
 #          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
@@ -11,23 +11,18 @@
 #                                                                                           #
 #############################################################################################
 
-#n=7
-#wt=( 9 3 )
-#tat=( 13 2 )
-#process_IDs=( 0 1 )
-sum_wt=0
-sum_tat=0
 
-for i in ${process_IDs[@]}
-do
-	sum_wt=$(($sum_wt+wt[$i]))
-	sum_tat=$(($sum_tat+tat[$i]))
-done
+function getNextInQueue(){
+    # This function returns the next process_id in the queue and at the same time removes it from the queue.
+    # If there is nothing in the queue it returns a 44 (44 because -1 does not work - turns it into a 255 wegen zweierkompliment - and 44 is ok because the max number of processes is 25 anyway.).
+    if [[ ${#queue[@]} -gt 0 ]]
+    then
+        x=${queue[0]}
+        queue=("${queue[@]:1}")
+        return $x
+    else
+        return 44  # Returns a 44 if queue is empty. There cant be 44 processes - 25 is the max for this simulator.
 
-avg_wt=$(bc <<< "scale=3;$sum_wt/$n")
-avg_tat=$(bc <<< "scale=3;$sum_tat/$n")
-printf "Average Waiting Time: $avg_wt"
-printf "\nAverage Turnaround Time: $avg_tat"
+    fi
 
-
-
+}

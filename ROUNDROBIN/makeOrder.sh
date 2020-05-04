@@ -2,7 +2,7 @@
 
 #############################################################################################
 #                                                                                           #
-# This shell script calculates the waiting time and burst time.                             #
+# This shell script checks if there are waiting processes and adds them to the queue.       #
 # Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
 #          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
 #          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
@@ -11,23 +11,22 @@
 #                                                                                           #
 #############################################################################################
 
-#n=7
-#wt=( 9 3 )
-#tat=( 13 2 )
-#process_IDs=( 0 1 )
-sum_wt=0
-sum_tat=0
 
-for i in ${process_IDs[@]}
-do
-	sum_wt=$(($sum_wt+wt[$i]))
-	sum_tat=$(($sum_tat+tat[$i]))
-done
-
-avg_wt=$(bc <<< "scale=3;$sum_wt/$n")
-avg_tat=$(bc <<< "scale=3;$sum_tat/$n")
-printf "Average Waiting Time: $avg_wt"
-printf "\nAverage Turnaround Time: $avg_tat"
+function makeOrder() {
+    # This function updates the queue list. 
+    for p in ${process_IDs[@]}  # Loop all processes there are.
+    do 
+        if [[ $p -ne $1 ]]  # One can pass a process_id as an argument and the one wont be put in queue.
+        then
+            isInOrder $p  # Check if the process is already in queue 1=YES, 0=NO.
+            x=$?  # Store the 1 or 0 in x.
+            if [[ ${at[$p]} -le $clock ]]  && [[ $x -eq 0 ]]  # Check if the process has already arrived. And is not already in queue.
+            then
+                queue+=($p)  # Only if the two conditions apply the process_id is added to tehe queue.
+            fi
+        fi
 
 
 
+    done
+}

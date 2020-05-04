@@ -2,7 +2,7 @@
 
 #############################################################################################
 #                                                                                           #
-# This shell script calculates the waiting time and burst time.                             #
+# This shell script adds a 1 for waiting or 0 for not waiting in the isWaiting array.       #
 # Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
 #          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
 #          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
@@ -11,23 +11,20 @@
 #                                                                                           #
 #############################################################################################
 
-#n=7
-#wt=( 9 3 )
-#tat=( 13 2 )
-#process_IDs=( 0 1 )
-sum_wt=0
-sum_tat=0
 
-for i in ${process_IDs[@]}
-do
-	sum_wt=$(($sum_wt+wt[$i]))
-	sum_tat=$(($sum_tat+tat[$i]))
-done
+function getAllWaitingJobs() {
 
-avg_wt=$(bc <<< "scale=3;$sum_wt/$n")
-avg_tat=$(bc <<< "scale=3;$sum_tat/$n")
-printf "Average Waiting Time: $avg_wt"
-printf "\nAverage Turnaround Time: $avg_tat"
+    # Reset the isWaiting array to all zeros
+    for i in ${process_IDs[@]}
+    do
+        isWaiting[$i]=0
+    done
 
-
-
+    for p in ${process_IDs[@]}
+    do
+        if [[ $((at[$p]-$clock)) -le 0 ]] && [[ ${bt[$p]} -gt 0 ]]  # A 
+        then
+            isWaiting[$p]=1
+        fi
+    done
+}

@@ -6,19 +6,19 @@
 max_no=75
 
 # No. of (sample) processes
-n=5
+n=3
 
-declare -a process_names=( A B C D E )
+declare -a process_names=( A B C )
 
 # List of process IDs
-declare -a process_IDs=( 0 1 2 3 4 )
+declare -a process_IDs=( 0 1 2 )
 
 # List of burst time
-declare -a bt=( 3 5 1 3 6)
+declare -a bt=( 3 4 7 )
 
 # Arrival Time
-declare -a at=( 3 5 7 2 6 ) # Copy (mutable)
-declare -a arrival_time=( 3 5 7 2 6 ) # Original (immutable)
+declare -a at=( 0 0 3 ) # Copy (mutable)
+declare -a arrival_time=( 0 0 3 ) # Original (immutable)
 
 # Waiting Time
 declare -a wt=( $(for i in $(seq 1 $n); do echo 0; done) )
@@ -31,23 +31,83 @@ declare -a tat=( $(for i in $(seq 1 $n); do echo 0; done) )
 
 #output of the "function"
 declare -a process_flow=()
-# One if process is waiting and zero if not
-isWaiting=( $(for i in $(seq 1 $n); do echo 0; done) )
-
-export processSchedulerWorkingDir=$(pwd)
 
 declare -a queue=()
 
 
-quantum=2  # The RoundRobin time slice/qunatum.
+quantum=2
 
 clock=0  # This is the simulations clock = passed time since start.
 
-source ${processSchedulerWorkingDir}/isInOrder.sh
-source ${processSchedulerWorkingDir}/makeOrder.sh
-source ${processSchedulerWorkingDir}/getNextInQueue.sh
-source ${processSchedulerWorkingDir}/getAllWaitingJobs.sh
 
+function isInOrder() {
+    # If the passsed process is alredy in the queue return 1. If not return 0.
+    for p2 in ${queue[@]}  # Loop all processes in queue.
+    do 
+        if [[ $p2 -eq $1 ]]  # If the one passed as an argument equals one of the ones inside queue.
+        then
+            return 1
+
+        fi
+    done
+    # If no process in queue equaled the passed one:
+    return 0
+}
+
+function makeOrder() {
+    # This function updates the queue list. 
+    for p in ${process_IDs[@]}  # Loop all processes there are.
+    do 
+        if [[ $p -ne $1 ]]  # One can pass a process_id as an argument and the one wont be put in queue.
+        then
+            isInOrder $p  # Check if the process is already in queue 1=YES, 0=NO.
+            x=$?  # Store the 1 or 0 in x.
+            if [[ ${at[$p]} -le $clock ]]  && [[ $x -eq 0 ]]  # Check if the process has already arrived. And is not already in queue.
+            then
+                queue+=($p)  # Only if the two conditions apply the process_id is added to tehe queue.
+            fi
+        fi
+
+
+
+    done
+}
+
+
+function getNextInQueue(){
+    # This function returns the next process_id in the queue and at the same time removes it from the queue.
+    # If there is nothing in the queue it returns a 44 (44 because -1 does not work - turns it into a 255 wegen zweierkompliment - and 44 is ok because the max number of processes is 25 anyway.).
+    if [[ ${#queue[@]} -gt 0 ]]
+    then
+        x=${queue[0]}
+        queue=("${queue[@]:1}")
+        return $x
+    else
+        return 44
+
+    fi
+
+}
+
+function getAllWaitingJobs() {
+
+    # Reset the isWaiting array to all zeros
+    for i in ${process_IDs[@]}
+    do
+        isWaiting[$i]=0
+    done
+
+    for p in ${process_IDs[@]}
+    do
+        if [[ $((at[$p]-$clock)) -le 0 ]] && [[ ${bt[$p]} -gt 0 ]]
+        then
+            isWaiting[$p]=1
+        fi
+    done
+    # Controlling
+    # echo "Finished" ${isWaiting[@]}
+
+}
 
 makeOrder 44
 
