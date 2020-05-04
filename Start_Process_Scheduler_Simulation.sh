@@ -51,21 +51,24 @@ do
 		set -- ""
 
 	else
-		echo "start_screen"
+		# Code is not clean.
+		source ${processSchedulerWorkingDir}/EverythingNotFinished/start_screen.sh
 	fi
 
 	
 	source ${processSchedulerWorkingDir}/common/createProcessOverview.sh
 	printf "\n"
 	${processSchedulerWorkingDir}/common/sleep.sh 15
+	printf "\n"
 
 
 	while [[ $isExit -ne 1 ]]
 	do
 		echo "choose alg"
 
-		
-		echo "avg wt tat"
+		echo "createChart"
+		${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
+		printf "\n"
 
 		echo "what do u wanna do?"
 		break # only for testing
