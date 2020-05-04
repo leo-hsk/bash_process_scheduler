@@ -96,6 +96,12 @@ then
 		# Assign input value to the array element
 		burst_time[$i]=$tmp
 	done
+
+	remProcesses
+	setProcesses
+else
+	# Neccessary to load sample processes, if already loaded own processes
+	source ${processSchedulerWorkingDir}/common/importHeader.sh
 fi
 
 
