@@ -83,9 +83,9 @@ do
 		printf "\n"
 
 		echo "what do u wanna do?"
-		break # only for testing
+		source ${processSchedulerWorkingDir}/common/chooseNextOperation.sh
 	done
 
-	isExit=$(($isExit-1))
+	#isExit=$(($isExit-1))
 	#isExit=1
 done
