@@ -37,25 +37,31 @@ then
 fi
 
 
-isExit=3
 # Main programm loop
 while [[ $isExit -ne 1 ]]
 do
 
+	source ${processSchedulerWorkingDir}/common/processManagement.sh
+
 	if [[ $1  = "--resume" ]]
 	then
-		# Have a look into the processManagement file
-		echo "checkiffileexists"
-		echo "load arrays"
 		
-		set -- "" # change command line parameter to ""
+		if [[ $(checkIfProcessesExist) -eq 1 ]]
+		then
+			loadProcesses
+			set -- "" # change command line parameter from "--resume" to ""
+		else
+			echo "No processes found."
+    		exit 0
+		fi
+		
+		
 
 	else
 		# Code is not clean.
 		source ${processSchedulerWorkingDir}/EverythingNotFinished/start_screen.sh
 	fi
 
-    source ${processSchedulerWorkingDir}/FCFS/echotest.sh
 	source ${processSchedulerWorkingDir}/common/createProcessOverview.sh
 	printf "\n"
 	${processSchedulerWorkingDir}/common/sleep.sh 15
