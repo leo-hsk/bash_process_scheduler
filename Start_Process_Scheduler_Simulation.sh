@@ -64,8 +64,19 @@ do
 
 	while [[ $isExit -ne 1 ]]
 	do
-		# maybe selecting algorithm with cursor arrows?
-		echo "choose alg"
+		${processSchedulerWorkingDir}/common/chooseAlgorithm.sh
+
+		if [ $? = "FCFS" ]
+		then
+			echo "FCFS"
+
+		elif [ $? = "HRRN" ]
+		then
+			echo "HRRN" 
+		elif [ $? = "RoundRobin" ]
+		then
+			echo "RoundRobin"
+		fi
 
 		echo "createChart"
 		${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
