@@ -34,5 +34,5 @@ awk 'BEGIN {printf("%-22s %-26s %-20s  \n" ,"Process", "Arrival Time", "Burst Ti
 for i in ${process_IDs[@]}
 do
 	echo "------------------------------------------------------------"
-	awk -v p_names="${process_names[$i]::20}" -v at="${at[$i]}" -v bt="${bt[$i]}" 'BEGIN {printf("%-26s %-26s %-20s  \n" ,p_names, at, bt)}'
+	awk -v p_names="${process_names[$i]::20}" -v at="${arrival_time[$i]}" -v bt="${burst_time[$i]}" 'BEGIN {printf("%-26s %-26s %-20s  \n" ,p_names, at, bt)}'
 done
