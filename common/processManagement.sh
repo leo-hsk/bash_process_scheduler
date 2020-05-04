@@ -16,29 +16,28 @@ processesFilePath=${releaseCreatorWorkingDir}/.processes.log
 
 function setProcesses() {
 	touch .processes.log
-	######## Needs to be implemented
-	# Create hidden file
-	# save processes into the file (name, waiting time, burst time, maybe no of processes?)
+	echo "n=$n" >> .processes.log
+	echo "export process_names=( ${process_names[@]} )" >> .processes.log
+	echo "export arrival_time=( ${arrival_time[@]} )" >> .processes.log
+	echo "export burst_time=( ${burst_time[@]} )" >> .processes.log
+	echo "export process_IDs=( ${process_IDs[@]} )" >> .processes.log
 
 }
 
-function getProcesses() {
-	echo
-	######## Needs to be implemented
-	# read data from file
-	# add data to arrays
+function loadProcesses() {
+	source ${processSchedulerWorkingDir}/.processes.log
 }
 
 function remProcesses() {
-	rm -f ${processesFilePath}
+	rm -f .processes.log
 }
 
 function checkIfProcessesExist() {
-	if [ -f "$processesFilepath" ]
+	if [ -f ".processes.log" ]
 	then
     	echo 1
+    else
+    	echo 0
 	fi
 
 }
-
-setProcesses 1
