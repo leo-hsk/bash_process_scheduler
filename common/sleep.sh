@@ -15,7 +15,7 @@ IFS=''
 for (( i=$1; i>0; i--))
 do
 	printf "\rYou have %02d seconds left to review processes or press [ENTER]" ${i}
-	read -s -N 1 -t 1 key
+	read -s -n 1 -t 1 key  # Does not work on mac yet. -N is not an option, like this it only skips one second.
 
 	if [ "$key" == $'\x0a' ] # '\x0a' is Enter
 	then
