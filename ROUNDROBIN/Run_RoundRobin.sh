@@ -53,10 +53,10 @@ quantum=2  # The RoundRobin time slice/qunatum.
 
 clock=0  # This is the simulations clock = passed time since start.
 
-source ${processSchedulerWorkingDir}/isInOrder.sh
-source ${processSchedulerWorkingDir}/makeOrder.sh
-source ${processSchedulerWorkingDir}/getNextInQueue.sh
-source ${processSchedulerWorkingDir}/getAllWaitingJobs.sh
+source ${processSchedulerWorkingDir}/ROUNDROBIN/isInOrder.sh
+source ${processSchedulerWorkingDir}/ROUNDROBIN/makeOrder.sh
+source ${processSchedulerWorkingDir}/ROUNDROBIN/getNextInQueue.sh
+source ${processSchedulerWorkingDir}/ROUNDROBIN/getAllWaitingJobs.sh
 
 
 makeOrder 44
@@ -84,11 +84,6 @@ do
                         if [[ $p -ne $id ]]
                         then
                             wt[$p]=$((wt[$p]+isWaiting[$p]))
-                            echo c $clock
-                            echo p $p
-                            echo wt ${wt[@]}
-                            echo is ${isWaiting[$p]}
-                            echo - - -
                         fi
                     done
 
@@ -118,8 +113,8 @@ do
 
 done
 
-echo
-echo ${process_flow[@]}
-echo __w ${wt[@]}
-echo tat ${tat[@]}
-echo _at ${at[@]}
+#echo
+#echo ${process_flow[@]}
+#echo __w ${wt[@]}
+#echo tat ${tat[@]}
+#echo _at ${at[@]}
