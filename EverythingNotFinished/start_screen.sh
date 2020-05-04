@@ -1,43 +1,28 @@
 # !/bin/bash
 
-
-########## Declaring global variables
-
-version="0.001 alpha"
-
 # No. of (sample) processes
-n=5
+#n=5
 
 # Max no. of gantt chart characters
-max_no=75
+#max_no=75
 
 # List of process names
-export process_names=( 1sds 2 3ss 42 5 )
+#export process_names=( 1sds 2 3ss 42 5 )
 
 # List of process IDs. The IDs represent the index of the process.
-export process_IDs=( 0 1 2 3 4 )
+#export process_IDs=( 0 1 2 3 4 )
 
 # List of burst time
-export bt=( 5 3 8 6 7 )
+#export bt=( 5 3 8 6 7 )
 
 # Arrival Time
-export at=( 0 1 2 3 5 )
+#export at=( 0 1 2 3 5 )
 
 # error color
 red=$'\e[1;31m'
 
 # white color
 end=$'\e[0m'
-
-export processSchedulerWorkingDir=$(pwd)
-
-
-
-########## Starting text, version information, etc.
-
-# Clear console but remain scrollback
-clear -x
-printf "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,\nsed diam nonumy eirmod tempor invidunt ut labore et doloremagna aliquyam erat,\n sed diam voluptua. At vero eos et accusamet justo duo dolores et ea rebum. \nStet clita kasd gubergren.\n\n"
 
 
 ##########
@@ -63,8 +48,8 @@ then
 	## Empty arrays
 	export process_names=( )
 	export process_IDs=( $(seq 0 1 $((n-1))) )
-	export bt=( )
-	export at=( )
+	export burst_time=( )
+	export arrival_time=( )
 
 	export tat=( $(for i in $(seq 1 $n); do echo 0; done) )
 	export wt=( $(for i in $(seq 1 $n); do echo 0; done) )
@@ -93,7 +78,7 @@ then
 		done
 
 		# Assign input value to the array element
-		at[$i]=$tmp
+		arrival_time[$i]=$tmp
 
 
 		## Get the burst time
@@ -109,13 +94,8 @@ then
 		done
 
 		# Assign input value to the array element
-		bt[$i]=$tmp
+		burst_time[$i]=$tmp
 	done
 fi
 
 
-clear -x
-
-#### Create Overview
-
-source ${processSchedulerWorkingDir}/createProcessOverview.sh
