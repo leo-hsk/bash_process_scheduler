@@ -25,7 +25,8 @@ else
 	exit 1
 fi
 
-## Declare global variables
+### Declare global variables  ###
+# Process specific variables
 export arrival_time=( 3 5 7 2 6 )
 export burst_time=( 3 5 1 3 6 )
 export process_names=( A B C D E )
@@ -33,9 +34,14 @@ export process_IDs=( 0 1 2 3 4 )
 
 export max_no=75 # Max no. of allowed gantt chart characters
 export n=5 # No. of sample processes
+
 export isExit=0
 
 export process_flow=()
 
+# Arrays for turnaround time and waiting time
 export tat=( $(for i in $(seq 1 $n); do echo 0; done) )
 export wt=( $(for i in $(seq 1 $n); do echo 0; done) )
+
+# Quantum / time slice for RoundRobin scheduling
+export quantum=3 # the defualt value for RoundRobin is 3
