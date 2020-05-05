@@ -15,7 +15,7 @@
 # The command line help is set here
 
 display_help() {
-    echo "Usage: $0  "--" {help|parameters1|parameters2|and so on}" >&2
+    echo "Usage: $0  "--" {help|resume}" >&2
     echo
     echo "#############################################################################################"
 	echo "#                                                                                           #"
@@ -29,10 +29,35 @@ display_help() {
 	echo "#############################################################################################"
 	echo
     echo "   -h, --help                run help for the given script"
-    echo "   -p1 					   give parameter 1"
-    echo "   -p2                       give parameter 2"
-    echo "   -aso                      give random stuff"
+    echo "   -r --resume 			   resume with last given Parameters"
+    echo "   -h HRRN --help HRRN       run help for HRRN Algorithm"
+    echo "   -h FCFS --help FCFS       run help for FCFS Algorithm"                        
+    echo "   -h rRobin --help rRobin      run help for Round Robin Algorithm"
+    echo "   -h HRRN --help HRRN       run help for HRRN Algorithm"
+   
+    exit 1
+}
+
+display_help_hrrn() {
+    echo "Usage: $0  "--" {help|resume}" >&2
     echo
+    echo "#############################################################################################"
+	echo "#                                                                                           #"
+	echo "# This helpfile shoukd give you all information to use this script                          #"
+	echo "# Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #"
+	echo "#          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #"
+	echo "#          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #"
+	echo "#                                                                                           #"
+	echo "# Copyright (c) 2020-2020 Anton Rösler, Leonard Hußke, Patrick Frech.  All Rights Reserved. #"
+	echo "#                                                                                           #"
+	echo "#############################################################################################"
+	echo
+    echo "   -h, --help                run help for the given script"
+    echo "   -r --resume 			   resume with last given Parameters"
+    echo "   -h HRRN --help HRRN       run help for HRRN Algorithm"
+    echo "   -h FCFS --help FCFS       run help for FCFS Algorithm"                        
+    echo "   -h rRobin --help rRobin      run help for Round Robin Algorithm"
+    echo "   -h HRRN --help HRRN       run help for HRRN Algorithm"
    
     exit 1
 }
@@ -46,21 +71,31 @@ do
           display_help  # Call your function
           exit 0
           ;;
-      -p1)
+      -r | --resume)
           # give first parameter to used script
-           shift 2
+           exit 0
            ;;
 
-      -p2)
+      -h_HRRN | --help_HRRN)
           # give second parameter to used script
-           shift 2
+          display_help_hrrn
+           exit 0
            ;;
 
-      --) # End of all options
-          shift
-          break
+      -h_FCFS |--help_FCFS) 
+      # explain 
+      	echo "Find another cool Stuff for FCFS here"
+          exit 0
           ;;
-      -*)
+
+          -h_rRobin |--help_rRobin) 
+      # explain
+      	echo "Find another cool Stuff for Round Robin here"
+          exit 0
+          ;;
+
+
+      -* | --*)
           echo "Error: Unknown option: $1" >&2
           ## or call function display_help
           exit 1 
