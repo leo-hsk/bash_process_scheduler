@@ -19,11 +19,11 @@ source ${processSchedulerWorkingDir}/common/importHeader.sh
 
 # Configure logging unit
 logFileName=${processSchedulerWorkingDir}/_log_/$(date +"%Y-%m-%d")_$(date +"%H-%M-%S")_VERSION=${version}
-# create_logfile ${logFilePath} # Uncomment if implemented 
+create_logfile ${logFilePath} # Uncomment if implemented 
 
-echo "############################################################"
-echo "#              Process Scheduling Simulator                #"
-echo "############################################################"
+log_info "############################################################"
+log_info "#              Process Scheduling Simulator                #"
+log_info "############################################################"
 
 
 #Print usage if param1 is not a valid value
@@ -49,9 +49,11 @@ do
 		if [[ $(checkIfProcessesExist) -eq 1 ]]
 		then
 			loadProcesses
+			log_file "Loading processess successful."
 			set -- "" # change command line parameter from "--resume" to ""
 		else
-			echo "No processes found."
+			log_error "processManagement.sh checkIfProcessesExist failed."
+			log_error "Process stopped."
     		exit 0
 		fi
 		
@@ -72,7 +74,7 @@ do
 	while [[ $isExit -ne 1 ]]
 	do
 		source ${processSchedulerWorkingDir}/common/chooseAlgorithm.sh
-        echo $algo_choice
+        
 		if [ $algo_choice = "FCFS" ]
 		then
             source ${processSchedulerWorkingDir}/FCFS/Run_FCFS.sh
