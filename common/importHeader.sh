@@ -39,4 +39,3 @@ export process_flow=()
 
 export tat=( $(for i in $(seq 1 $n); do echo 0; done) )
 export wt=( $(for i in $(seq 1 $n); do echo 0; done) )
-

@@ -28,12 +28,19 @@ function copyBurstTime () {
     done
 }
 
+
+function resetTatAndWt () {
+    
+    tat=( $(for i in $(seq 1 $n); do echo 0; done) )
+    wt=( $(for i in $(seq 1 $n); do echo 0; done) )
+
+}
+
 function resetArrays() {
     
     copyBurstTime
     copyArrivalTime
-    
+    resetTatAndWt
     #printf "reseted\n"
 
 }
-

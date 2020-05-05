@@ -1,5 +1,17 @@
 #! /bin/bash
+at=( 3 5 7 2 6 )
+bt=( 3 5 1 3 6 )
+process_names=( A B C D E )
+process_IDs=( 0 1 2 3 4 )
 
+max_no=75 # Max no. of allowed gantt chart characters
+n=5 # No. of sample processes
+
+
+process_flow=()
+
+tat=( $(for i in $(seq 1 $n); do echo 0; done) )
+wt=( $(for i in $(seq 1 $n); do echo 0; done) )
 
 # One if process is waiting and zero if not
 isWaiting=( $(for i in $(seq 1 $n); do echo 0; done) )
@@ -11,13 +23,70 @@ responseR=( $(for i in $(seq 1 $n); do echo 0; done) )
 
 
 #output of the "function"
-declare -a process_flow=()
 
+
+processSchedulerWorkingDir=$(pwd)
 
 ############# FOR FINAL IMPLEMENTATION CHANGE TO:	source ${processSchedulerWorkingDir}/FCFS/xxxxxxxxxxx.sh
-source ${processSchedulerWorkingDir}/HRRN/findHighestResponseRatio.sh
-source ${processSchedulerWorkingDir}/HRRN/calcResponseRatio.sh
-source ${processSchedulerWorkingDir}/common/getAllWaitingJobs.sh
+function findHighestResponseRatio(){
+    # Start with index 0
+
+    highest=0
+
+    # Iterate through each responseRatio element
+    for i in ${process_IDs[@]}
+    do
+        # Check if process already arrived
+        if [[ ${at[$i]} -le $clock ]]
+        then
+        
+            # Check if the value of the response ratio element is more than the highest (first) at this time
+            if [[ $((responseR[$i])) -ge $((responseR[$highest])) ]]
+             then
+                 # If yes, set the current index of the response ratio element to the highest value
+                highest=$i
+             fi
+         fi
+done
+# Return index of the highest value
+echo $highest
+
+}
+
+function calcResponseRatio() {
+    # Reset the isWaiting array to all zeros
+    for p in ${process_IDs[@]}
+    do
+        # Calculate response ratio fo each process * 1000
+        if [[ ${bt[$p]} -eq 0 ]]
+        then
+            responseR[$p]=0
+        else
+            rratio=$(bc <<< "scale=0;(${wt[$p]}+${bt[$p]})*1000/${bt[$p]}")
+            responseR[$p]=$rratio
+        fi
+    done
+}
+
+function getAllWaitingJobs() {
+
+    # Reset the isWaiting array to all zeros
+    for i in $(seq 0 $((${#isWaiting[@]}-1)))
+    do
+        isWaiting[$i]=0
+    done
+
+    for p in ${process_IDs[@]}
+    do
+        if [[ $((at[$p]-$clock)) -le 0 ]]
+        then
+            isWaiting[$p]=1
+        fi
+    done
+    # Controlling
+    # echo "Finished" ${isWaiting[@]}
+
+}
 
 
 # Track the no. of iterations
@@ -76,4 +145,3 @@ done
 echo ${process_flow[@]}
 #echo tat ${tat[@]}
 #echo at ${at[@]}
-	
