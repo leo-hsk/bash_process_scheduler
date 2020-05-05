@@ -80,8 +80,8 @@ do
 	do
 		source ${processSchedulerWorkingDir}/common/chooseAlgorithm.sh
         resetArrays
-        echo bt ${bt[@]}
-        echo wt ${wt[@]}
+        #echo bt ${bt[@]}
+        #echo wt ${wt[@]}
         
 		if [ $algo_choice = "FCFS" ]
 		then
@@ -98,9 +98,9 @@ do
             source ${processSchedulerWorkingDir}/ROUNDROBIN/Run_RoundRobin.sh
 		fi
         
-        echo 'process_flow' ${process_flow[@]}
-        echo bt ${bt[@]}
-        echo wt ${wt[@]}
+        #echo 'process_flow' ${process_flow[@]}
+        #echo bt ${bt[@]}
+        #echo wt ${wt[@]}
 		source ${processSchedulerWorkingDir}/common/CreateChart.sh
 		source ${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
 		printf "\n"
