@@ -15,7 +15,6 @@
 function copyArrivalTime () {
     for i in $(seq 0 $((${#arrival_time[@]}-1)))
     do
-        echo hi
         at[$i]=${arrival_time[$i]}
     done
 }
@@ -23,7 +22,6 @@ function copyArrivalTime () {
 function copyBurstTime () {
     for i in $(seq 0 $((${#burst_time[@]}-1)))
     do
-        echo hi
         bt[$i]=${burst_time[$i]}
     done
 }
