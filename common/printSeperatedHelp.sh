@@ -11,15 +11,15 @@
 #                                                                                           #
 #############################################################################################
 
-case "$1" in
+case "$2" in
       
-      -r |--resume)
+      --resume)
           # give first parameter to used script
           echo "run the progamm with the last given paramters"
            exit 0
            ;;
 
-      -HRRN |--HRRN)
+      --HRRN)
           # give second parameter to used script
           echo ""
           echo "###############################################################"
@@ -35,7 +35,7 @@ case "$1" in
            exit 0
            ;;
 
-      -FCFS |--FCFS) 
+      --FCFS) 
       # explain 
           echo ""
           echo "###############################################################"
@@ -54,7 +54,7 @@ case "$1" in
           exit 0
           ;;
 
-          -RoundRobin |--RoundRobin) 
+      --RoundRobin) 
       # explain
           echo ""
           echo "###############################################################"
@@ -74,7 +74,7 @@ case "$1" in
           ;;
 
 
-      -* | --*)
+      --*)
           echo "Error: Unknown option: $1" >&2
           ## or call function display_help
           exit 1 
