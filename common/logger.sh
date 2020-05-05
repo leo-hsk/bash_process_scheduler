@@ -19,3 +19,15 @@ create_logfile() {
   fi
   touch ${logFileName}_${thisLogfileName}
 }
+
+log_info() {
+  printf "%s\r\n" "${1}" | tee -a ${logFileName}_${thisLogfileName}
+}
+
+log_error() {
+  printf "ERROR: %s\r\n" "${1}" | tee -a ${logFileName}_${thisLogfileName}
+}
+
+log_file() {
+  printf "%s\r\n" "${1}" >> ${logFileName}_${thisLogfileName}
+}
