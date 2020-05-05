@@ -63,9 +63,9 @@ do
         # Add symbols to all processes which are not processed in this iteration
         for p2 in "${process_nums[@]}"
         do
-            ct=$((${tat[$p2]}+${at[$p2]})) # Calculate completion time
+            ct=$((${tat[$p2]}+${arrival_time[$p2]})) # Calculate completion time
             # Add a ▒ if the process already arrived in the queue and is not finished.
-            if [[ $p2 != $p ]] && [[ ${at[$p2]} -lt $ticker ]] && [[ $ct -ge $ticker ]]
+            if [[ $p2 != $p ]] && [[ ${arrival_time[$p2]} -lt $ticker ]] && [[ $ct -ge $ticker ]]
             then
                 output_data[$p2]=${output_data[$p2]}'▒' # On every other processe's line a ░ gets added.
             elif [[ $p2 != $p ]]
