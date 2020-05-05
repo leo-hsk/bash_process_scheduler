@@ -1,25 +1,23 @@
 #! /bin/bash
 
 # Create some samples here that will later be replaced by the real output from the Algorithms
-process_names=( A B C D E )
+
 
 # Wichtig: Ich gehe hier davon aus das jedem Prozess der Reihenfolge nach eine nummer gegeben wird.
 # Also A -> 0, B -> 1, C -> 2 ... 
 # Und das in der Simulation nicht die namen in die Output Liste geschreiben werden, sondern eben die Nummer:
 # Die Output Liste sollte dann so aussehen:
-process_flow=(-1 -1 3 3 3 0 0 0 1 1 1 1 1 4 4 4 4 4 4 2)
+
 
 ##########################
 # Calculated through previous steps or user input
 # Arrival Time
-declare -a at=( 3 5 7 2 6 ) # Copy (mutable)
-declare -a arrival_time=( 3 5 7 2 6 ) # Original (immutable)
 
 # Turnaround Time
-declare -a tat=( 5 8 13 3 13 )
+
 ##########################
 
-algorithm="Shortest Remaining Time First"
+algorithm=$algo_choice
 
 declare -a process_nums
 declare -a output_data

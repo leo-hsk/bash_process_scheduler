@@ -20,6 +20,7 @@ source ${processSchedulerWorkingDir}/common/importHeader.sh
 # Import functions
 source ${processSchedulerWorkingDir}/common/copyArrays.sh
 
+
 # Configure logging unit
 logFileName=${processSchedulerWorkingDir}/_log_/$(date +"%Y-%m-%d")_$(date +"%H-%M-%S")_VERSION=${version}
 create_logfile ${logFilePath} # Uncomment if implemented 
@@ -97,7 +98,7 @@ do
         
         echo 'process_flow' ${process_flow[@]}
         echo bt ${bt[@]}
-		echo "createChart"
+		source ${processSchedulerWorkingDir}/common/CreateChart.sh
 		${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
 		printf "\n"
 
