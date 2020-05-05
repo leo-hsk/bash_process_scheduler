@@ -45,3 +45,7 @@ export wt=( $(for i in $(seq 1 $n); do echo 0; done) )
 
 # Quantum / time slice for RoundRobin scheduling
 export quantum=3 # the defualt value for RoundRobin is 3
+
+export validParam2=("--FCFS" \ 
+			 		"--HRRN" \
+			 		"--RoundRobin")
