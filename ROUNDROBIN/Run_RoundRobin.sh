@@ -12,39 +12,9 @@
 #############################################################################################
 
 
-# Max no. of gantt chart characters
-max_no=75
 
-# No. of (sample) processes
-n=5
 
-declare -a process_names=( A B C D E )
-
-# List of process IDs
-declare -a process_IDs=( 0 1 2 3 4 )
-
-# List of burst time
-declare -a bt=( 3 5 1 3 6)
-
-# Arrival Time
-declare -a at=( 3 5 7 2 6 ) # Copy (mutable)
-declare -a arrival_time=( 3 5 7 2 6 ) # Original (immutable)
-
-# Waiting Time
-declare -a wt=( $(for i in $(seq 1 $n); do echo 0; done) )
-
-# One if process is waiting and zero if not
-isWaiting=( $(for i in $(seq 1 $n); do echo 0; done) )
-
-# Turnaround Time
-declare -a tat=( $(for i in $(seq 1 $n); do echo 0; done) )
-
-#output of the "function"
-declare -a process_flow=()
-# One if process is waiting and zero if not
-isWaiting=( $(for i in $(seq 1 $n); do echo 0; done) )
-
-export processSchedulerWorkingDir=$(pwd)
+#export processSchedulerWorkingDir=$(pwd)
 
 declare -a queue=()
 

@@ -17,6 +17,9 @@ export processSchedulerWorkingDir=$(pwd)
 # Import configuration
 source ${processSchedulerWorkingDir}/common/importHeader.sh
 
+# Import functions
+source ${processSchedulerWorkingDir}/common/copyArrays.sh
+
 # Configure logging unit
 logFileName=${processSchedulerWorkingDir}/_log_/$(date +"%Y-%m-%d")_$(date +"%H-%M-%S")_VERSION=${version}
 create_logfile ${logFilePath} # Uncomment if implemented 
@@ -74,6 +77,8 @@ do
 	while [[ $isExit -ne 1 ]]
 	do
 		source ${processSchedulerWorkingDir}/common/chooseAlgorithm.sh
+        resetArrays
+        echo bt ${bt[@]}
         
 		if [ $algo_choice = "FCFS" ]
 		then
@@ -91,6 +96,7 @@ do
 		fi
         
         echo 'process_flow' ${process_flow[@]}
+        echo bt ${bt[@]}
 		echo "createChart"
 		${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
 		printf "\n"
