@@ -27,3 +27,13 @@ function copyBurstTime () {
         bt[$i]=${burst_time[$i]}
     done
 }
+
+function resetArrays() {
+    
+    copyBurstTime
+    copyArrivalTime
+    
+    #printf "reseted\n"
+
+}
+
