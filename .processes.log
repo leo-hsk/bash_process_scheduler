@@ -1,0 +1,5 @@
+export n=2
+export process_names=( a b )
+export arrival_time=( 3 5 )
+export burst_time=( 4 6 )
+export process_IDs=( 0 1 )
