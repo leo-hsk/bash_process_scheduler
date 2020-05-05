@@ -14,12 +14,11 @@
 
 
 
-#export processSchedulerWorkingDir=$(pwd)
 
 declare -a queue=()
 
 
-quantum=2  # The RoundRobin time slice/qunatum.
+source ${processSchedulerWorkingDir}/ROUNDROBIN/chooseTimeQuantum.sh
 
 clock=0  # This is the simulations clock = passed time since start.
 
