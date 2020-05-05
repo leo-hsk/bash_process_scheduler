@@ -29,14 +29,29 @@ log_info "############################################################"
 log_info "#              Process Scheduling Simulator                #"
 log_info "############################################################"
 
+# Print help if param2 is a valid value
+if ( [ $1 = "--help" ] && [[ $2 != "" ]] )
+then
+	for param2 in ${validParam2[@]}
+	do
+		if [ $2 = $param2 ]
+  		then
+			echo "Execute seperatedHelp.sh "
+			exit 0 
+  		fi
+	done 
+    log_info ""
+    log_error "Wrong parameter 2"
+    source ${processSchedulerWorkingDir}/common/printHelp.sh
+    exit 0
+fi
 
-
-#Print usage if param1 is not a valid value
+# Print usage if param1 is not a valid value
 if [[ $1 != "" ]]
 then
-  if ( [ $1 = "--help" ] ||  [ $1 != "--resume" ] )
+  if ( ( [ $1 = "--help" ] && [[ $2 = "" ]] ) || [ $1 != "--resume" ] )
   then
-    ${processSchedulerWorkingDir}/common/printHelp.sh
+    source ${processSchedulerWorkingDir}/common/printHelp.sh
     exit 0
   fi
 fi
