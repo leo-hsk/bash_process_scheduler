@@ -73,7 +73,7 @@ do
     fi
 done
 
-echo ${process_flow[@]}
+#echo ${process_flow[@]}
 #echo tat ${tat[@]}
 #echo at ${at[@]}
 	
