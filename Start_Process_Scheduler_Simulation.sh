@@ -30,16 +30,17 @@ log_info "#              Process Scheduling Simulator                #"
 log_info "############################################################"
 
 
+
 #Print usage if param1 is not a valid value
 if [[ $1 != "" ]]
 then
   if ( [ $1 = "--help" ] ||  [ $1 != "--resume" ] )
   then
-    echo "Print HELP here"
+    ${processSchedulerWorkingDir}/common/printHelp.sh
     exit 0
   fi
 fi
-
+echo "This Program was part oft the EBIS Module Operating Systems \nand Computer Networks. \n"
 
 # Main programm loop
 while [[ $isExit -ne 1 ]]
