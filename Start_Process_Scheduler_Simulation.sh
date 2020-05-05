@@ -36,7 +36,7 @@ then
 	do
 		if [ $2 = $param2 ]
   		then
-			echo "Execute seperatedHelp.sh "
+			source ${processSchedulerWorkingDir}/common/printSeperatedHelp.sh
 			exit 0 
   		fi
 	done 
