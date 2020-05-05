@@ -11,12 +11,12 @@
 #                                                                                           #
 #############################################################################################
 
-export processSchedulerWorkingDir=$(pwd)
+
 processesFilePath=${releaseCreatorWorkingDir}/.processes.log
 
 function setProcesses() {
 	touch .processes.log
-	echo "n=$n" >> .processes.log
+	echo "export n=$n" >> .processes.log
 	echo "export process_names=( ${process_names[@]} )" >> .processes.log
 	echo "export arrival_time=( ${arrival_time[@]} )" >> .processes.log
 	echo "export burst_time=( ${burst_time[@]} )" >> .processes.log
