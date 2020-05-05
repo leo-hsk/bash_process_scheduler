@@ -80,6 +80,7 @@ do
 		source ${processSchedulerWorkingDir}/common/chooseAlgorithm.sh
         resetArrays
         echo bt ${bt[@]}
+        echo wt ${wt[@]}
         
 		if [ $algo_choice = "FCFS" ]
 		then
@@ -98,8 +99,9 @@ do
         
         echo 'process_flow' ${process_flow[@]}
         echo bt ${bt[@]}
+        echo wt ${wt[@]}
 		source ${processSchedulerWorkingDir}/common/CreateChart.sh
-		${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
+		source ${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
 		printf "\n"
 
 		echo "what do u wanna do?"

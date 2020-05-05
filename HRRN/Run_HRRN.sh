@@ -63,7 +63,7 @@ do
         at[$id]=$(($max_no+1))
 
         # Calculate the turnaround time using the immutable arrival time array.
-        #tat[$id]=$(($clock-${arrival_time[$id]}))
+        tat[$id]=$(($clock-${arrival_time[$id]}))
 
     else
         # If there is no process ready to process, add -1 to the process flow array
