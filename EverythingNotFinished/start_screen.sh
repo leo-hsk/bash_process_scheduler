@@ -26,7 +26,8 @@ end=$'\e[0m'
 
 
 ##########
-read -p "Do you want to use sample processes? (Y|N)" -n 1 -r
+echo "Do you want to use sample processes? (Y|N)"
+read -p "--> " -n 1 -r 
 echo   " " # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then

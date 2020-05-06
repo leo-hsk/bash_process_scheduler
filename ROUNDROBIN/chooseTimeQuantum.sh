@@ -16,7 +16,6 @@
 while True
 do
     echo "How long do you want the time slice to be? 1-50."
-    echo 
     read -p "--> " -n 2 -r
     echo 
     q_answer=$REPLY 

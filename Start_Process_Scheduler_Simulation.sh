@@ -61,7 +61,25 @@ then
     exit 0
 fi
 
-echo "This Program was part oft the EBIS Module Operating Systems \nand Computer Networks. \n"
+echo ""
+echo "This bash script simulates the scheduling of processes in a"
+echo "single processor system using First Come First Serve (FCFS),"
+echo "Higehst Response Ratio Next (HRRN) or Round Robin scheduling"
+echo "algorithm."
+echo ""
+echo "The program was developed as part of the examination for the"
+echo "'Operating Systems and Computer Networks' module of the EBIS"
+echo "(Engineering Business Information Systems) degree program at"
+echo "Frankfurt University of Applied Sciences in 2020."
+echo ""
+echo "Running version: "${version}
+echo ""
+echo "Contributors:"
+echo "   -Anton Roesler"
+echo "   -Leonard Husske"
+echo "   -Patrick Frech"
+echo ""
+echo ""
 
 # Main programm loop
 while [[ $isExit -ne 1 ]]
@@ -91,14 +109,15 @@ do
 	fi
 
 	source ${processSchedulerWorkingDir}/common/createProcessOverview.sh
-	printf "\n"
+	echo ""
 	${processSchedulerWorkingDir}/common/sleep.sh 15
-	printf "\n"
 
-    declare -a process_flow=()
     
 	while [[ $isExit -ne 1 ]]
 	do
+		echo ""
+		echo ""
+		log_info "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 		source ${processSchedulerWorkingDir}/common/chooseAlgorithm.sh
         resetArrays
         #echo bt ${bt[@]}
@@ -107,12 +126,10 @@ do
 		if [ $algo_choice = "FCFS" ]
 		then
             source ${processSchedulerWorkingDir}/FCFS/Run_FCFS.sh
-			
 
 		elif [ $algo_choice = "HRRN" ]
 		then
             source ${processSchedulerWorkingDir}/HRRN/Run_HRRN.sh
-   
    
 		elif [ $algo_choice = "RoundRobin" ]
 		then
@@ -124,9 +141,11 @@ do
         #echo wt ${wt[@]}
 		source ${processSchedulerWorkingDir}/common/CreateChart.sh
 		source ${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
-		printf "\n"
-
-		echo "what do u wanna do?"
+		
+		echo ""
+		echo ""
+		log_info "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+		echo ""
 		source ${processSchedulerWorkingDir}/common/chooseNextOperation.sh
 	done
 
