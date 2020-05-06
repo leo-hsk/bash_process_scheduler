@@ -14,7 +14,7 @@
 source ${processSchedulerWorkingDir}/common/selectOptions.sh
 
 echo "WHAT SHOULD BE HERE?:"
-echo
+echo ""
 
 options=("Choose different algorithm" "Change processes" "Exit program")
 
@@ -33,5 +33,7 @@ then
 elif [[ choice -eq 2 ]]
 then
 	isExit=1
+	log_info "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+	echo ""
 	echo "Aborting program."
 fi

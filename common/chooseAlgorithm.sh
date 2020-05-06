@@ -13,7 +13,9 @@
 
 source ${processSchedulerWorkingDir}/common/selectOptions.sh
 
-printf "Select one algorithm using up/down keys and enter to confirm:\n\n"
+echo ""
+echo "Select one algorithm using up/down keys and enter to confirm:"
+echo ""
 
 options=("FCFS" "HRRN" "RoundRobin")
 
