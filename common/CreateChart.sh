@@ -93,9 +93,10 @@ full_line="     1••••••••10••••••••20•••�
 # Remove from the full line everything that extends the length of the process simulation 
 time_line=${full_line::${#full_line}-n_remove}
 
-echo_n 5  # Make some space.
+log_info "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo_n 2  # Make some space.
 echo Gantt Chart of $algorithm  # Diagramm Title with name of the chosen algorithm.
-echo_n 2
+echo_n 1
 echo "$time_line"
 len_out_data=${#output_data[@]}
 let x=$len_out_data-1
@@ -104,7 +105,7 @@ do
     echo "${output_data[$i]}"  # Print every processe's output line.
 done
 echo "$time_line"
-echo_n 5
+echo_n 1
 
 
 
