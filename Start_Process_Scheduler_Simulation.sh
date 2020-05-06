@@ -29,32 +29,38 @@ log_info "############################################################"
 log_info "#              Process Scheduling Simulator                #"
 log_info "############################################################"
 
-# Print help if param2 is a valid value
-if ( [ $1 = "--help" ] && [[ $2 != "" ]] )
+
+#Print usage if param1 is not a valid value
+if [[ $1 != "" ]] && [[ $2 = "" ]]
+then
+	if ( [ $1 = "--help" ] || ( [ $1 != "--resume" ] ) )
+	then
+    	source ${processSchedulerWorkingDir}/common/printHelp.sh
+    	exit 0
+  	fi
+fi
+
+#Print valid parameters if param1 is "--help" and param2 is invalid
+if [[ $1 = "--help" ]]
 then
 	for param2 in ${validParam2[@]}
-	do
-		if [ $2 = $param2 ]
-  		then
-			source ${processSchedulerWorkingDir}/common/printSeperatedHelp.sh
-			exit 0 
-  		fi
-	done 
-    log_info ""
-    log_error "Wrong parameter 2"
-    source ${processSchedulerWorkingDir}/common/printHelp.sh
+ 	do
+ 		if [ $2 = $param2 ]
+   		then
+ 			source ${processSchedulerWorkingDir}/common/printSeperatedHelp.sh
+ 			exit 0 
+   		fi
+ 	done 
+	echo ""
+    echo "No valid parameter 2 given."
+    echo "Valid parameters are:"
+    echo ""
+    source ${processSchedulerWorkingDir}/common/printValidParam2.sh
+    echo ""
+    echo ""
     exit 0
 fi
 
-# Print usage if param1 is not a valid value
-if [[ $1 != "" ]]
-then
-  if ( ( [ $1 = "--help" ] && [[ $2 = "" ]] ) || [ $1 != "--resume" ] )
-  then
-    source ${processSchedulerWorkingDir}/common/printHelp.sh
-    exit 0
-  fi
-fi
 echo "This Program was part oft the EBIS Module Operating Systems \nand Computer Networks. \n"
 
 # Main programm loop
