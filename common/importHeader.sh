@@ -49,4 +49,5 @@ export quantum=3 # the defualt value for RoundRobin is 3
 export validParam2=("--FCFS" \ 
 			 		"--HRRN" \
 			 		"--RoundRobin" \
-			 		"--resume" )
+			 		"--resume" \
+			 		"--chart" )
