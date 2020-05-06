@@ -73,6 +73,25 @@ case "$2" in
           exit 0
           ;;
 
+      --chart) 
+      # explain
+          echo ""
+          echo "###############################################################"
+          echo "#         RoundRobin algorithm overview and  function         #"
+          echo "###############################################################"
+          echo ""
+          echo "is one of the algorithms employed by process and network "
+          echo "schedulers in computing. As the term is generally used, time  "
+          echo "slices (also known as time quanta) are assigned to each process "
+          echo "in equal portions and in circular order, handling all processes  "
+          echo "without priority (also known as cyclic executive). Round-robin  "
+          echo "scheduling is simple, easy to implement, and starvation-free.  "
+          echo "Round-robin scheduling can be applied to other scheduling  "
+          echo "problems, such as data packet scheduling in computer networks. "
+          echo "It is an operating system concept."
+          exit 0
+          ;;
+
 
       --*)
           echo "Error: Unknown option: $1" >&2
