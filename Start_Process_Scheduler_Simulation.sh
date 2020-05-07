@@ -137,9 +137,10 @@ do
 		fi
         
         #echo 'process_flow' ${process_flow[@]}
-        #echo bt ${bt[@]}
-        #echo wt ${wt[@]}
+        echo tat ${tat[@]}
+        echo wt ${wt[@]}
 		source ${processSchedulerWorkingDir}/common/CreateChart.sh
+        source ${processSchedulerWorkingDir}/common/end_overview.sh
 		source ${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
 		
 		echo ""
