@@ -13,7 +13,7 @@
 
 source ${processSchedulerWorkingDir}/common/selectOptions.sh
 
-echo "WHAT SHOULD BE HERE?:"
+echo "WHAT WOULD YOU LIKE TO DO NEXT?:"
 echo ""
 
 options=("Choose different algorithm" "Change processes" "Exit program")
