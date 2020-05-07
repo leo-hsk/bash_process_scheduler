@@ -1,6 +1,6 @@
 #! /bin/bash
 
-awk 'BEGIN {printf("%-10s %-10s %-10s %-10s %-10s  \n" ,"Process", "AT", "BT", "WT", "TAT")}'
+awk 'BEGIN {printf("%-10s %-10s %-10s %-10s %-10s  \n" ,"Process", "AT", "BT", "TAT", "WT")}'
 for i in ${process_IDs[@]}
 do
     echo "------------------------------------------------------------"
