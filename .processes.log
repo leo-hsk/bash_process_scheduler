@@ -1,5 +1,5 @@
-export n=5
-export process_names=( a b c d e )
-export arrival_time=( 3 5 12 4 8 )
-export burst_time=( 8 4 6 12 3 )
-export process_IDs=( 0 1 2 3 4 )
+export n=3
+export process_names=( A B C )
+export arrival_time=( 13 17 0 )
+export burst_time=( 24 13 7 )
+export process_IDs=( 0 1 2 )
