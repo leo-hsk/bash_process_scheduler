@@ -9,7 +9,7 @@ do
 
     printf "\rYou have %02d seconds left." ${i}
     i=$(($i-1))
-    read -t 1 -p " Or Press ENTER to continue."
+    read -s -t 1 -p " Or Press ENTER to continue."
     a=$?
     if [[ $a == 0 ]]
     then
