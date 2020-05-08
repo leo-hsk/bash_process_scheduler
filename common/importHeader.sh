@@ -11,12 +11,9 @@
 #                                                                                           #
 #############################################################################################
 
+source ${processSchedulerWorkingDir}/common/logger.sh  # Import logging unit
 
-# Import logging unit
-source ${processSchedulerWorkingDir}/common/logger.sh
-
-# Import configuration
-if [[ -f ${processSchedulerWorkingDir}/setup.conf ]]
+if [[ -f ${processSchedulerWorkingDir}/setup.conf ]]  # Import configuration
 then
 	source ${processSchedulerWorkingDir}/setup.conf
 else
@@ -25,8 +22,7 @@ else
 	exit 1
 fi
 
-### Declare global variables  ###
-# Process specific variables
+### Declare global variables. Those are the sample processes: ###
 export arrival_time=( 3 5 7 2 6 )
 export burst_time=( 3 5 1 3 6 )
 export process_names=( A B C D E )
@@ -37,14 +33,12 @@ export n=5 # No. of sample processes
 
 export isExit=0
 
-export process_flow=()
+export process_flow=()  # This is the array that gets filled by the scheduling algorithm and later visualized as a gantt chart.
 
-# Arrays for turnaround time and waiting time
-export tat=( $(for i in $(seq 1 $n); do echo 0; done) )
-export wt=( $(for i in $(seq 1 $n); do echo 0; done) )
+export tat=( $(for i in $(seq 1 $n); do echo 0; done))  # Arrays to store turnaround time.
+export wt=( $(for i in $(seq 1 $n); do echo 0; done))  # Arrays to store waiting time.
 
-# Quantum / time slice for RoundRobin scheduling
-export quantum=3 # the defualt value for RoundRobin is 3
+export quantum=3  # Quantum/time-slice for RoundRobin scheduling. The defualt value is 3.
 
 export validParam2=("--FCFS" \ 
 			 		"--HRRN" \

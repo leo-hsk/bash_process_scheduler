@@ -11,7 +11,6 @@
 #                                                                                           #
 #############################################################################################
 
-
 processesFilePath=${releaseCreatorWorkingDir}/.processes.log
 
 function setProcesses() {
@@ -21,7 +20,6 @@ function setProcesses() {
 	echo "export arrival_time=( ${arrival_time[@]} )" >> .processes.log
 	echo "export burst_time=( ${burst_time[@]} )" >> .processes.log
 	echo "export process_IDs=( ${process_IDs[@]} )" >> .processes.log
-
 }
 
 function loadProcesses() {
@@ -39,5 +37,4 @@ function checkIfProcessesExist() {
     else
     	echo 0
 	fi
-
 }

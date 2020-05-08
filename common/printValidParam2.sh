@@ -13,5 +13,4 @@
 
 for i in ${validParam2[@]}; do
 	echo $i
-	
 done
