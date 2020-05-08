@@ -105,12 +105,12 @@ do
 
 	else
 		# Code is not clean.
-		source ${processSchedulerWorkingDir}/EverythingNotFinished/start_screen.sh
+		source ${processSchedulerWorkingDir}/common/readUserProcesses.sh
 	fi
 
 	source ${processSchedulerWorkingDir}/common/createProcessOverview.sh
 	echo ""
-	${processSchedulerWorkingDir}/common/sleep.sh 15
+	${processSchedulerWorkingDir}/common/sleep.sh 20
 
     
 	while [[ $isExit -ne 1 ]]
@@ -141,7 +141,7 @@ do
 		source ${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
         echo
         echo
-		source ${processSchedulerWorkingDir}/common/end_overview.sh
+		source ${processSchedulerWorkingDir}/common/endOverview.sh
 
 		echo ""
 		echo ""
@@ -149,7 +149,4 @@ do
 		echo ""
 		source ${processSchedulerWorkingDir}/common/chooseNextOperation.sh
 	done
-
-	#isExit=$(($isExit-1))
-	#isExit=1
 done

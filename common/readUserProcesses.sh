@@ -18,12 +18,6 @@
 # Arrival Time
 #export at=( 0 1 2 3 5 )
 
-# error color
-red=$'\e[1;31m'
-
-# white color
-end=$'\e[0m'
-
 
 ##########
 echo "Do you want to use sample processes? (Y|N)"
@@ -41,7 +35,7 @@ then
 	# Check if input is integer and NOT zero
 	while ! [[ "$n" =~ ^[1-9]+$ ]]
 	do
-       	printf "${red}Sorry integers > 0 only${end}\n"
+       	printf "${red}Sorry integers > 0 only${endRed}\n"
        	printf "\nEnter the number of processes you want to create: "
        	read n
 	done
@@ -73,7 +67,7 @@ then
 		# Check if input is integer
 		while ! [[ "$tmp" =~ ^[0-9]+$ ]]
 		do
-       		printf "${red}Sorry integers only${end}\n"
+       		printf "${red}Sorry integers only${endRed}\n"
        		printf "Enter the arrival time of process number $(($i+1)): "
        		read tmp
 		done
@@ -89,7 +83,7 @@ then
 		# Check if input is integer
 		while ! [[ "$tmp" =~ ^[0-9]+$ ]]
 		do
-       		printf "${red}Sorry integers only${end}\n"
+       		printf "${red}Sorry integers only${endRed}\n"
        		printf "Enter the burst time of process number $(($i+1)): "
        		read tmp
 		done

@@ -2,7 +2,7 @@
 
 #############################################################################################
 #                                                                                           #
-# This shell script calculates the waiting time and burst time.                             #
+# This shell script calculates the average waiting time and burst time.                     #
 # Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
 #          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
 #          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
@@ -11,10 +11,6 @@
 #                                                                                           #
 #############################################################################################
 
-#n=7
-#wt=( 9 3 )
-#tat=( 13 2 )
-#process_IDs=( 0 1 )
 sum_wt=0
 sum_tat=0
 

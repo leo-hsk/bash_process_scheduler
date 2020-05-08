@@ -11,17 +11,13 @@
 #                                                                                           #
 #############################################################################################
 
-
 function isInOrder() {
-    # If the passsed process is alredy in the queue return 1. If not return 0.
     for p2 in ${queue[@]}  # Loop all processes in queue.
     do 
         if [[ $p2 -eq $1 ]]  # If the one passed as an argument equals one of the ones inside queue.
         then
             return 1
-
         fi
     done
-    # If no process in queue equaled the passed one:
-    return 0
+    return 0 # If no process in queue equaled the passed one:
 }

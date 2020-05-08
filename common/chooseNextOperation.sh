@@ -2,7 +2,7 @@
 
 #############################################################################################
 #                                                                                           #
-# The user can jump to creating new processes or using a different algorithm.               #
+# The user can jump to creating new processes or using a different algorithm or exit.       #
 # Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
 #          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
 #          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
@@ -13,7 +13,7 @@
 
 source ${processSchedulerWorkingDir}/common/selectOptions.sh
 
-echo "WHAT WOULD YOU LIKE TO DO NEXT?:"
+echo "What would you like to do next?"
 echo ""
 
 options=("Choose different algorithm" "Change processes" "Exit program")

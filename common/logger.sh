@@ -11,7 +11,7 @@
 #                                                                                           #
 #############################################################################################
 
-thisLogfileName=_ProcessScheduler.log
+thisLogfileName=ProcessScheduler.log
 
 create_logfile() {
   if [ ! -d $1 ]; then

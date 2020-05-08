@@ -26,7 +26,4 @@ function getAllWaitingJobs() {
 			isWaiting[$p]=1
 		fi
 	done
-	# Controlling
-	# echo "Finished" ${isWaiting[@]}
-
 }

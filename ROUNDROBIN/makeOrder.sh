@@ -12,8 +12,7 @@
 #############################################################################################
 
 
-function makeOrder() {
-    # This function updates the queue list. 
+function makeOrder() { 
     for p in ${process_IDs[@]}  # Loop all processes there are.
     do 
         if [[ $p -ne $1 ]]  # One can pass a process_id as an argument and the one wont be put in queue.
@@ -25,8 +24,5 @@ function makeOrder() {
                 queue+=($p)  # Only if the two conditions apply the process_id is added to tehe queue.
             fi
         fi
-
-
-
     done
 }
