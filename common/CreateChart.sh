@@ -78,7 +78,7 @@ echo "$time_line"
 
 for i in $(seq 0 $(($n-1)))
 do 
-    echo "${output_data[$i]}"  # Print every processe's output line.
+    echo "${output_data[$i]::96}"  # Print every processe's output line.
 done
 echo "$time_line"
 echo
