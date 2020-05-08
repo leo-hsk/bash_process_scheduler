@@ -1,22 +1,15 @@
-# !/bin/bash
+#!/bin/bash
 
-# No. of (sample) processes
-#n=5
-
-# Max no. of gantt chart characters
-#max_no=75
-
-# List of process names
-#export process_names=( 1sds 2 3ss 42 5 )
-
-# List of process IDs. The IDs represent the index of the process.
-#export process_IDs=( 0 1 2 3 4 )
-
-# List of burst time
-#export bt=( 5 3 8 6 7 )
-
-# Arrival Time
-#export at=( 0 1 2 3 5 )
+#############################################################################################
+#                                                                                           #
+# The user can choose process parameters.                                                   #
+# Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
+#          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
+#          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
+#                                                                                           #
+# Copyright (c) 2020-2020 Anton Rösler, Leonard Hußke, Patrick Frech.  All Rights Reserved. #
+#                                                                                           #
+#############################################################################################
 
 
 ##########
