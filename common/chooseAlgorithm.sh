@@ -20,7 +20,5 @@ echo ""
 options=("FCFS" "HRRN" "RoundRobin")
 
 select_option "${options[@]}"
-choice=$?
-
-# echo "${options[$choice]}"
+choice=$?  # Catch return value of 'select_option'
 algo_choice=${options[$choice]}

@@ -45,3 +45,8 @@ export validParam2=("--FCFS" \
 			 		"--RoundRobin" \
 			 		"--resume" \
 			 		"--chart" )
+
+export red=$'\e[1;31m'  # Red color
+
+
+export endRed=$'\e[0m'  # White color

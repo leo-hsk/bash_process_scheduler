@@ -2,7 +2,7 @@
 
 #############################################################################################
 #                                                                                           #
-# This shell script calculates the waiting time and burst time.                             #
+# This shell script creates an table-like process overview in the console.                  #
 # Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
 #          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
 #          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
@@ -11,24 +11,9 @@
 #                                                                                           #
 #############################################################################################
 
-#n=7
-#wt=( 9 3 )
-#tat=( 13 2 )
-#process_IDs=( 0 1 )
-sum_wt=0
-sum_tat=0
-
+awk 'BEGIN {printf("%-12s %-12s %-12s %-12s %-12s  \n" ,"Process", "AT", "BT", "WT", "TAT")}'
 for i in ${process_IDs[@]}
 do
-	sum_wt=$(($sum_wt+wt[$i]))
-	sum_tat=$(($sum_tat+tat[$i]))
+    echo "------------------------------------------------------------"
+    awk -v p_names="${process_names[$i]::8}" -v at="${arrival_time[$i]}" -v bt="${burst_time[$i]}" -v wtt="${wt[$i]}" -v tt="${tat[$i]}" 'BEGIN {printf("%-12s %-12s %-12s %-12s %-12s  \n" ,p_names, at, bt, wtt, tt)}'
 done
-
-avg_wt=$(bc <<< "scale=3;$sum_wt/$n")
-avg_tat=$(bc <<< "scale=3;$sum_tat/$n")
-
-printf "Average Waiting Time: $avg_wt"
-printf "\nAverage Turnaround Time: $avg_tat"
-
-
-

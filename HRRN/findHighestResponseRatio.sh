@@ -12,9 +12,8 @@
 #############################################################################################
 
 function findHighestResponseRatio(){
-	# Start with index 0
-
-	highest=0
+	
+	highest=0  # Start with index 0
 
 	# Iterate through each responseRatio element
 	for i in ${process_IDs[@]}
@@ -22,16 +21,11 @@ function findHighestResponseRatio(){
 		# Check if process already arrived
 		if [[ ${at[$i]} -le $clock ]]
 		then
-		
-			# Check if the value of the response ratio element is more than the highest (first) at this time
-    		if [[ $((responseR[$i])) -ge $((responseR[$highest])) ]]
+    		if [[ $((responseR[$i])) -ge $((responseR[$highest])) ]]  # Check if the value of the response ratio element is more than the highest (first) at this time
      		then
-     			# If yes, set the current index of the response ratio element to the highest value
-        		highest=$i
+        		highest=$i # If yes, set the current index of the response ratio element to the highest value
      		fi
      	fi
 done
-# Return index of the highest value
-echo $highest
-
+echo $highest # Return index of the highest value
 }

@@ -11,7 +11,6 @@
 #                                                                                           #
 #############################################################################################
 
-
 function getAllWaitingJobs() {
 
     # Reset the isWaiting array to all zeros
@@ -22,7 +21,7 @@ function getAllWaitingJobs() {
 
     for p in ${process_IDs[@]}
     do
-        if [[ $((at[$p]-$clock)) -le 0 ]] && [[ ${bt[$p]} -gt 0 ]]  # A 
+        if [[ $((at[$p]-$clock)) -le 0 ]] && [[ ${bt[$p]} -gt 0 ]]  
         then
             isWaiting[$p]=1
         fi

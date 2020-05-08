@@ -2,7 +2,7 @@
 
 #############################################################################################
 #                                                                                           #
-# This shell script contains functions to copy the arrival and burdt time array.            #
+# This shell script contains functions to copy the arrival and burst time array.            #
 # Authors: Anton Rösler (anton.roesler@stud.fra-uas.de)                                     #
 #          Leonard Hußke (leonard.husske@stud.fra-uas.de)                                   #
 #          Patrick Frech (patrick.frech@stud.fra-uas.de)                                    #
@@ -28,17 +28,14 @@ function copyBurstTime () {
 
 
 function resetTatAndWt () {
-    
+
     tat=( $(for i in $(seq 1 $n); do echo 0; done) )
     wt=( $(for i in $(seq 1 $n); do echo 0; done) )
-
 }
 
 function resetArrays() {
-    
+
     copyBurstTime
     copyArrivalTime
     resetTatAndWt
-    #printf "reseted\n"
-
 }

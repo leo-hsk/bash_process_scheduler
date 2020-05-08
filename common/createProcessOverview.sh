@@ -11,19 +11,6 @@
 #                                                                                           #
 #############################################################################################
 
-##### DECLARED ONLY FOR TESTING
-#declare -a process_names=( 1sdssds 2lkdsergdfgsdfgsdfgsdajfl 3ss 42 5 )
-
-# List of process IDs. The IDs represent the index of the process.
-#declare -a process_IDs=( 0 1 2 3 4 )
-
-# List of burst time
-#declare -a bt=( 5 333 8 63 7 )
-
-# Arrival Time
-#declare -a at=( 0 12 2 3 5 )
-
-#######################################################
 log_info ""
 log_info ""
 log_info "############################################################"

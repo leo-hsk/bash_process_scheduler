@@ -11,9 +11,7 @@
 #                                                                                           #
 #############################################################################################
 
-
 function getNextInQueue(){
-    # This function returns the next process_id in the queue and at the same time removes it from the queue.
     # If there is nothing in the queue it returns a 44 (44 because -1 does not work - turns it into a 255 wegen zweierkompliment - and 44 is ok because the max number of processes is 25 anyway.).
     if [[ ${#queue[@]} -gt 0 ]]
     then
@@ -22,7 +20,5 @@ function getNextInQueue(){
         return $x
     else
         return 44  # Returns a 44 if queue is empty. There cant be 44 processes - 25 is the max for this simulator.
-
     fi
-
 }
