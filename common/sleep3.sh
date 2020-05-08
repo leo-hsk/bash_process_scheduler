@@ -3,7 +3,7 @@
 
 
 
-i=10
+i=15
 while [[ i -ge 0 ]]
 do 
 

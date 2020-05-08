@@ -137,7 +137,7 @@ do
 		fi
         
         #echo 'process_flow' ${process_flow[@]}
-		source ${processSchedulerWorkingDir}/common/CreateChart.sh
+		source ${processSchedulerWorkingDir}/common/createChart.sh
 		source ${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
         echo
         echo
