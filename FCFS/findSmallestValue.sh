@@ -12,24 +12,17 @@
 #############################################################################################
 
 function findSmallestValue(){
-	# Start with index 0
-	smallest=0
+	smallest=0  # Start with index 0
 
-	# Get length -1 of the arrival time array
-	let len=${#at[*]}-1
+	let len=${#at[*]}-1  # Get highest inedx of the arrival time array.
 
-	# Iterate through each arrival time element
-	for i in $(seq 0 $len)
+	for i in $(seq 0 $len)  # Iterate through each index in the arrival time array.
 	do
-
-		# Check if the value of the arrival time element is less then the smallest (first) at this time
-		if [[ $((at[$i])) -lt $((at[$smallest])) ]]
+		if [[ $((at[$i])) -lt $((at[$smallest])) ]]  # Check if the value of the arrival time element is less than the smallest.
  		then
- 			# If yes, set the current index of the arrival time element to the smallest value
-    		smallest=$i
+    		smallest=$i  # If yes, set the current index of the arrival time element to the smallest value
  		fi
 done
-# Return index of the smallest value
-echo $smallest
+echo $smallest  # Return index of the smallest value
 
 }
