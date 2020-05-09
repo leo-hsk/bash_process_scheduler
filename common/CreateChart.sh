@@ -18,9 +18,8 @@ declare -a output_data
 len_names=${#process_names[@]}
 
 spaces="     "
-# For every name in the process names we want a number in process nums, starting with 1:
-let x=$len_names-1
-for i in $(seq 0 $x)  # Loop trough range 0 to length of namesList.
+
+for i in ${process_IDs[@]}  # Loop trough process IDs.
 do
     process_names[$i]=${process_names[$i]::5}  # If a Process name is longer than five chars it gets shortend to five.
     
