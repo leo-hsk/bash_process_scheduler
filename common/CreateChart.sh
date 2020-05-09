@@ -75,7 +75,7 @@ echo Gantt Chart of $algorithm  # Diagramm Title with name of the chosen algorit
 echo
 echo "$time_line"
 
-for i in $(seq 0 $(($n-1)))
+for i in ${process_IDs[@]}
 do 
     echo "${output_data[$i]::96}"  # Print every processe's output line.
 done
