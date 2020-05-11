@@ -21,9 +21,8 @@ clock=0  # Track the no. of iterations
 while [ $(IFS=+; echo "$((${bt[*]}))") -gt 0 ]  # Loop until the sum of the burst time array is zero.
 do	
 	id=$(findSmallestValue)  # Find index of the process with smallest arrival time.
-	let tmp=${at[$id]}-$clock
 
-	if [[ $tmp -le 0 ]]
+	if [[ ${at[$id]} -le $clock ]]
 	then
 		service_units=${bt[$id]}
 
@@ -37,6 +36,7 @@ do
 				then
 					wt[$p]=$((wt[$p]+isWaiting[$p]))
 				fi
+				#printf "."
 			done
 
 			process_flow[$(($clock))]=$id  # Add the id of the process to the process_flow array.
