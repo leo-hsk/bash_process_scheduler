@@ -71,13 +71,13 @@ time_line=${full_line::${#full_line}-n_remove}  # Remove from the full line ever
 
 log_info "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo
-echo Gantt Chart of $algorithm  # Diagramm Title with name of the chosen algorithm.
+echo Gantt Chart of $algorithm  # Diagram Title with name of the chosen algorithm.
 echo
 echo "$time_line"
 
 for i in ${process_IDs[@]}
 do 
-    echo "${output_data[$i]::96}"  # Print every processe's output line.
+    echo "${output_data[$i]::96}"  # Print every process's output line.
 done
 echo "$time_line"
 echo
