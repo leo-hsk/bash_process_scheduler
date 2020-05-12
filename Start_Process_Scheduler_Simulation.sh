@@ -64,7 +64,7 @@ fi
 echo ""
 echo "This bash script simulates the scheduling of processes in a"
 echo "single processor system using First Come First Serve (FCFS),"
-echo "Higehst Response Ratio Next (HRRN) or Round Robin scheduling"
+echo "Highest Response Ratio Next (HRRN) or Round Robin scheduling"
 echo "algorithm."
 echo ""
 echo "The program was developed as part of the examination for the"
@@ -81,7 +81,7 @@ echo "   -Patrick Frech"
 echo ""
 echo ""
 
-# Main programm loop
+# Main program loop
 while [[ $isExit -ne 1 ]]
 do
 
