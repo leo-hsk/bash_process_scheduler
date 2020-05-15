@@ -110,7 +110,7 @@ do
 
 	source ${processSchedulerWorkingDir}/common/createProcessOverview.sh
 	echo ""
-	${processSchedulerWorkingDir}/common/sleep.sh 20
+	${processSchedulerWorkingDir}/common/sleep.sh 25
 
     
 	while [[ $isExit -ne 1 ]]
