@@ -54,12 +54,11 @@ do
                     makeOrder $id  # Call the make order function and pass id, beacuse we do not want to include id in the queue since it is processed at the moment. If another process comes in at that moment of time, the other processes must get the spot in queue infront of theone processed right now.
                 done
 
+            bt[$id]=$((${bt[$id]}-$service_units))  # Update the burst time.
             if [[ ${bt[$id]} -gt $((0)) ]]  # If the process is not finished:
             then
                 queue+=($id)  # Add the process back to the queue.
             fi
-            #makeOrder 44  # Now we need to call make order again, because id might not be finished and so must be put in the queue, but we excluded it inside the loop.
-            bt[$id]=$((${bt[$id]}-$service_units))  # Update the burst time.
             tat[$id]=$(($clock-${arrival_time[$id]}))  # Calculate the turnaround time using the immutable arrival time array.
         fi
     else
