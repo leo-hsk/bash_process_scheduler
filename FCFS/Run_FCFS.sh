@@ -13,6 +13,7 @@
 
 source ${processSchedulerWorkingDir}/FCFS/findSmallestValue.sh
 source ${processSchedulerWorkingDir}/common/getAllWaitingJobs.sh
+source ${processSchedulerWorkingDir}/common/spinner.sh
 
 isWaiting=( $(for i in $(seq 1 $n); do echo 0; done))  # One if process is waiting and zero if not
 
@@ -36,9 +37,9 @@ do
 				then
 					wt[$p]=$((wt[$p]+isWaiting[$p]))
 				fi
-				#printf "."
 			done
-
+			
+			spin
 			process_flow[$(($clock))]=$id  # Add the id of the process to the process_flow array.
 			clock=$(($clock+1))  # Increase clock by one.
 		done
@@ -51,3 +52,4 @@ do
 		clock=$(($clock+1))  # And increase clock by one.
 	fi
 done
+endspin
