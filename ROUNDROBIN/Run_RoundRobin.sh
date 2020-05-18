@@ -16,6 +16,7 @@ source ${processSchedulerWorkingDir}/ROUNDROBIN/isInOrder.sh
 source ${processSchedulerWorkingDir}/ROUNDROBIN/makeOrder.sh
 source ${processSchedulerWorkingDir}/ROUNDROBIN/getNextInQueue.sh
 source ${processSchedulerWorkingDir}/ROUNDROBIN/getAllWaitingJobs.sh
+source ${processSchedulerWorkingDir}/common/spinner.sh
 
 declare -a queue=()
 
@@ -52,6 +53,7 @@ do
                     process_flow[$clock]=$id  # Add the id of the process to the process_flow array
                     clock=$(($clock+1))  # Increase clock by one.
                     makeOrder $id  # Call the make order function and pass id, beacuse we do not want to include id in the queue since it is processed at the moment. If another process comes in at that moment of time, the other processes must get the spot in queue infront of theone processed right now.
+                    spin
                 done
 
             if [[ ${bt[$id]} -gt $((0)) ]]  # If the process is not finished:
@@ -68,3 +70,4 @@ do
         makeOrder 44  # Call make order to add new processes that might appeared in the clock increase by one.
     fi
 done
+endspin
