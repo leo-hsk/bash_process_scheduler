@@ -14,6 +14,7 @@
 source ${processSchedulerWorkingDir}/HRRN/findHighestResponseRatio.sh
 source ${processSchedulerWorkingDir}/HRRN/calcResponseRatio.sh
 source ${processSchedulerWorkingDir}/common/getAllWaitingJobs.sh
+source ${processSchedulerWorkingDir}/common/spinner.sh
 
 isWaiting=( $(for i in $(seq 1 $n); do echo 0; done) )
 responseR=( $(for i in $(seq 1 $n); do echo 0; done) )
@@ -44,6 +45,7 @@ do
                 fi
             done
 
+            spin
             process_flow[$(($clock))]=$id # Add the id of the process to the process_flow array
             clock=$(($clock+1)) # Add the number of service units to the clock
         done
@@ -57,3 +59,4 @@ do
         clock=$(($clock+1))
     fi
 done
+endspin
