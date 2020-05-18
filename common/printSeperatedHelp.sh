@@ -89,6 +89,8 @@ E    ░░░░░░▒▒▒▒▒▒▒██████░
           echo "  ▒: Process in queue ('Waiting') but not executed."
           echo "  █: Process executed."
           echo ""
+          echo "Timeline: Each dot represents one 'time unit'."
+          echo ""
           exit 0
           ;;
 
