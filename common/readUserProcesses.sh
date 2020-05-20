@@ -11,26 +11,24 @@
 #                                                                                           #
 #############################################################################################
 
-
-##########
 echo "Do you want to use sample processes? (Y|N)"
 read -p "--> " -n 1 -r 
 echo   " " # (optional) move to a new line
+
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
-	#### NO: Create new processes
-
+	
+	printf "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
 	clear -x
-
 	## Choose no. of processes
-	printf "\nEnter the number of processes you want to create: "
-	read n
+	printf "\nEnter the number of processes you want to create. \n"
+	read -p "--> " n 
 	# Check if input is integer and NOT zero
-	while ! [[ "$n" =~ ^[1-9]+$ ]]
+	while ([[ $n -gt 25 ]] || [[ $n -lt 1 ]])
 	do
-       	printf "${red}Sorry integers > 0 only${endRed}\n"
-       	printf "\nEnter the number of processes you want to create: "
-       	read n
+       	printf "${red}Sorry integers > 0 and < 25 only${endRed}\n"
+       	printf "\nEnter the number of processes you want to create. \n"
+       	read -p "--> " n
 	done
 
 	## Empty arrays
@@ -46,50 +44,41 @@ then
 	for i in $(seq 0 $(($n-1)))
 	do
 		## Get the name
-		printf "\nEnter the name of process number $(($i+1)): "
-		read tmp
-
-		# Assign input value to the array element
+		printf "\nEnter the name of process number $(($i+1)).\n"
+		read -p "--> " tmp
 		process_names[$i]=$tmp
 
-
 		## Get the arrival time
-		printf "\nEnter the arrival time of process number $(($i+1)): "
-		read tmp
+		printf "\nEnter the arrival time of process number $(($i+1)).\n"
+		read -p "--> " tmp
 
-		# Check if input is integer
 		while ! [[ "$tmp" =~ ^[0-9]+$ ]]
 		do
        		printf "${red}Sorry integers only${endRed}\n"
-       		printf "Enter the arrival time of process number $(($i+1)): "
-       		read tmp
+       		printf "Enter the arrival time of process number $(($i+1)).\n"
+       		read -p "--> " tmp
 		done
-
-		# Assign input value to the array element
 		arrival_time[$i]=$tmp
 
-
 		## Get the burst time
-		printf "\nEnter the burst time of process number $(($i+1)): "
-		read tmp
+		printf "\nEnter the burst time of process number $(($i+1)).\n"
+		read -p "--> " tmp
 
-		# Check if input is integer
 		while ! [[ "$tmp" =~ ^[0-9]+$ ]]
 		do
        		printf "${red}Sorry integers only${endRed}\n"
-       		printf "Enter the burst time of process number $(($i+1)): "
-       		read tmp
+       		printf "Enter the burst time of process number $(($i+1)).\n"
+       		read -p "--> " tmp
 		done
-
-		# Assign input value to the array element
 		burst_time[$i]=$tmp
+
 	done
 
 	remProcesses
 	setProcesses
+
 else
-	# Neccessary to load sample processes, if already loaded own processes
-	source ${processSchedulerWorkingDir}/common/importHeader.sh
+	source ${processSchedulerWorkingDir}/common/importHeader.sh  	# Neccessary to load sample processes if already loaded own processes
 fi
 
 
