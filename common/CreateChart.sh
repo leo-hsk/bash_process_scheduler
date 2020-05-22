@@ -69,7 +69,7 @@ full_line="     1••••••••10••••••••20•••�
  
 time_line=${full_line::${#full_line}-n_remove}  # Remove from the full line everything that extends the length of the process simulation
 
-log_info "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo
 echo Gantt Chart of $algorithm  # Diagram Title with name of the chosen algorithm.
 echo

@@ -20,14 +20,9 @@ source ${processSchedulerWorkingDir}/common/importHeader.sh
 # Import functions
 source ${processSchedulerWorkingDir}/common/copyArrays.sh
 
-
-# Configure logging unit
-logFileName=${processSchedulerWorkingDir}/_log_/$(date +"%Y-%m-%d")_$(date +"%H-%M-%S")_VERSION=${version}
-create_logfile ${logFilePath} # Uncomment if implemented 
-
-log_info "############################################################"
-log_info "#              Process Scheduling Simulator                #"
-log_info "############################################################"
+echo "############################################################"
+echo "#              Process Scheduling Simulator                #"
+echo "############################################################"
 
 
 #Print usage if param1 is not a valid value
@@ -93,11 +88,10 @@ do
 		if [[ $(checkIfProcessesExist) -eq 1 ]]
 		then
 			loadProcesses
-			log_file "Loading processess successful."
 			set -- "" # change command line parameter from "--resume" to ""
 		else
-			log_error "processManagement.sh checkIfProcessesExist failed."
-			log_error "Process stopped."
+			echo "processManagement.sh checkIfProcessesExist failed."
+			echo "Process stopped."
     		exit 0
 		fi
 		
@@ -117,7 +111,7 @@ do
 	do
 		echo ""
 		echo ""
-		log_info "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+		echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 		source ${processSchedulerWorkingDir}/common/chooseAlgorithm.sh
         resetArrays
         #echo bt ${bt[@]}
@@ -145,7 +139,7 @@ do
 
 		echo ""
 		echo ""
-		log_info "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+		echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 		echo ""
 		source ${processSchedulerWorkingDir}/common/chooseNextOperation.sh
 	done

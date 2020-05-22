@@ -25,5 +25,3 @@ echo ""
 echo "Valid param2's are: "
 echo ""
 source ${processSchedulerWorkingDir}/common/printValidParam2.sh
-echo ""
-echo ""

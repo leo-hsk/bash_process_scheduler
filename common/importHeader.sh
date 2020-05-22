@@ -11,8 +11,6 @@
 #                                                                                           #
 #############################################################################################
 
-source ${processSchedulerWorkingDir}/common/logger.sh  # Import logging unit
-
 if [[ -f ${processSchedulerWorkingDir}/setup.conf ]]  # Import configuration
 then
 	source ${processSchedulerWorkingDir}/setup.conf

@@ -74,10 +74,13 @@ then
 
 	done
 
+	echo ""
+
 	remProcesses
 	setProcesses
 
 else
+	echo ""
 	source ${processSchedulerWorkingDir}/common/importHeader.sh  	# Neccessary to load sample processes if already loaded own processes
 fi
 
