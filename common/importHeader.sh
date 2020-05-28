@@ -21,13 +21,13 @@ else
 fi
 
 ### Declare global variables. Those are the sample processes: ###
-export arrival_time=( 3 5 7 2 6 )
-export burst_time=( 3 5 1 3 6 )
-export process_names=( A B C D E )
-export process_IDs=( 0 1 2 3 4 )
+export arrival_time=( 4 3 0 5 12 20 9 15 )
+export burst_time=( 7 8 3 2 5 5 12 1 )
+export process_names=( a b c d e f g h )
+export process_IDs=( 0 1 2 3 4 5 6 7 )
 
 export max_no=75 # Max no. of allowed gantt chart characters
-export n=5 # No. of sample processes
+export n=8 # No. of sample processes
 
 export isExit=0
 
