@@ -37,7 +37,7 @@ do
 
             getAllWaitingJobs
             # Update waiting times each iteration for every process other than id
-            for p in $process_IDs
+            for p in $(seq 0 $((${#isWaiting[@]}-1)))
             do
                 if [[ $p -ne $id ]]
                 then
