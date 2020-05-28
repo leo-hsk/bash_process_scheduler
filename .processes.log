@@ -1,5 +1,5 @@
 export n=1
-export process_names=( a )
-export arrival_time=( 3 )
-export burst_time=( 4 )
+export process_names=( A )
+export arrival_time=( 2 )
+export burst_time=( 1 )
 export process_IDs=( 0 )
