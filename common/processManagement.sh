@@ -11,7 +11,7 @@
 #                                                                                           #
 #############################################################################################
 
-processesFilePath=${releaseCreatorWorkingDir}/.processes.log
+processesFilePath=${processSchedulerWorkingDir}/.processes.log
 
 function setProcesses() {
 	touch .processes.log
