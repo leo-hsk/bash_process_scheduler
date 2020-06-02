@@ -13,6 +13,7 @@
 
 
 function copyArrivalTime () {
+    at=( $(for i in $(seq 1 $n); do echo 0; done) )
     for i in $(seq 0 $((${#arrival_time[@]}-1)))
     do
         at[$i]=${arrival_time[$i]}
@@ -20,6 +21,7 @@ function copyArrivalTime () {
 }
 
 function copyBurstTime () {
+    bt=( $(for i in $(seq 1 $n); do echo 0; done) )
     for i in $(seq 0 $((${#burst_time[@]}-1)))
     do
         bt[$i]=${burst_time[$i]}
