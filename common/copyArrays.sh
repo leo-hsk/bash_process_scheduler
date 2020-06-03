@@ -35,9 +35,15 @@ function resetTatAndWt () {
     wt=( $(for i in $(seq 1 $n); do echo 0; done) )
 }
 
+function resetProcessFlow () {
+
+    process_flow=( )
+}
+
 function resetArrays() {
 
     copyBurstTime
     copyArrivalTime
     resetTatAndWt
+    resetProcessFlow
 }
