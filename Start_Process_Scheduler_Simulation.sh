@@ -127,7 +127,7 @@ do
             source ${processSchedulerWorkingDir}/ROUNDROBIN/Run_RoundRobin.sh
 		fi
         
-		source ${processSchedulerWorkingDir}/common/createChart.sh
+		source ${processSchedulerWorkingDir}/common/CreateChart.sh
 		source ${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
         echo
         echo
