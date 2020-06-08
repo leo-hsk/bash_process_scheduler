@@ -98,7 +98,6 @@ do
 		
 
 	else
-		# Code is not clean.
 		source ${processSchedulerWorkingDir}/common/readUserProcesses.sh
 	fi
 
@@ -114,8 +113,6 @@ do
 		echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 		source ${processSchedulerWorkingDir}/common/chooseAlgorithm.sh
         resetArrays
-        #echo bt ${bt[@]}
-        #echo wt ${wt[@]}
         
 		if [ $algo_choice = "FCFS" ]
 		then
@@ -130,7 +127,6 @@ do
             source ${processSchedulerWorkingDir}/ROUNDROBIN/Run_RoundRobin.sh
 		fi
         
-        #echo 'process_flow' ${process_flow[@]}
 		source ${processSchedulerWorkingDir}/common/createChart.sh
 		source ${processSchedulerWorkingDir}/common/calcAvgWaitingTurnaroundTime.sh
         echo
